@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bifurcation Explorer — The Concept of Nature</title>
+<style>
+:root{--paper:#faf8f3;--ink:#1b2430;--accent:#6d4aff;--soft:#e8e3d8;--warn:#c0392b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;background:var(--paper);color:var(--ink);line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+a.back{font-family:sans-serif;font-size:.85rem;color:var(--accent);text-decoration:none}
+h1{font-weight:normal;margin:.5rem 0 .2rem}
+.claimbox{background:#fff;border-left:4px solid var(--accent);padding:1rem 1.2rem;margin:1.2rem 0;font-style:italic}
+.pid{font-family:sans-serif;font-size:.75rem;background:var(--soft);padding:.1rem .4rem;border-radius:3px;cursor:pointer;white-space:nowrap}
+.pid:hover{background:var(--accent);color:#fff}
+.zones{display:flex;gap:1.5rem;margin:2rem 0}
+.zone{flex:1;min-height:280px;border:2px dashed #b5ad9d;background:#fff;padding:1rem;text-align:center;transition:background .3s}
+.zone.hot{background:#fdf3f2;border-color:var(--warn)}
+.zone h3{font-weight:normal;margin-bottom:.2rem}
+.zone .dz{font-size:.8rem;color:#999;font-style:italic}
+.card{display:inline-block;background:var(--ink);color:var(--paper);padding:.35rem .8rem;margin:.2rem;border-radius:4px;cursor:grab;font-size:.9rem;user-select:none}
+.pool{margin:1.5rem 0;padding:1rem;border:1px solid var(--soft);background:#fff}
+.pulse{animation:pulse 1.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(192,57,43,.5)}70%{box-shadow:0 0 0 18px rgba(192,57,43,0)}100%{box-shadow:0 0 0 0 rgba(192,57,43,0)}}
+.conflict{display:none;border:2px solid var(--warn);background:#fdf3f2;padding:1rem 1.2rem;margin:1rem 0}
+.variant{display:none;border:1px solid var(--soft);background:#fff;padding:1rem 1.2rem;margin:1rem 0}
+.vbtn{font-family:sans-serif;font-size:.8rem;border:1px solid var(--ink);background:none;padding:.3rem .8rem;cursor:pointer;margin-right:.5rem}
+.vbtn.on{background:var(--ink);color:var(--paper)}
+blockquote{border-left:3px solid var(--accent);padding-left:1rem;margin:.8rem 0;font-style:italic;color:#333}
+.modal{display:none;position:fixed;inset:0;background:rgba(27,36,48,.6);align-items:center;justify-content:center}
+.modal .box{background:var(--paper);max-width:640px;max-height:80vh;overflow:auto;padding:2rem;border-radius:6px}
+.modal .close{float:right;cursor:pointer;font-family:sans-serif}
+.hidden{display:none!important}
+#modaltext{margin-top:1rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html">&larr; Home</a>
+<h1 data-i18n="title">The Bifurcation Explorer</h1>
+<div class="claimbox">
+<span id="claim" data-i18n="claim"></span>
+<br><small><span class="pid" data-pid="ch2-p013">ch2-p013</span> · <span data-i18n="claimsig"></span></small>
+</div>
+
+<div class="pool" id="pool">
+<b data-i18n="poolhdr"></b><br><span data-i18n="poolhint"></span>
+<br><span class="card" draggable="true">colour</span>
+<span class="card" draggable="true">warmth</span>
+<span class="card" draggable="true">electrons</span>
+<span class="card" draggable="true">molecular agitation</span>
+<span class="card" draggable="true">weight</span>
+<span class="card" draggable="true">smell of smoke</span>
+</div>
+
+<div class="zones">
+<div class="zone" id="zone-apparent" data-zone="apparent">
+<h3 data-i18n="z1"></h3>
+<div class="dz" data-i18n="z1h"></div>
+</div>
+<div class="zone" id="zone-causal" data-zone="causal">
+<h3 data-i18n="z2"></h3>
+<div class="dz" data-i18n="z2h"></div>
+</div>
+</div>
+
+<button class="vbtn" id="btn-fire" style="margin-bottom:1.5rem" data-i18n="firebtn"></button>
+
+<div class="conflict" id="conflict">
+<b data-i18n="conflictt"></b>
+<p data-i18n="conflictx"></p>
+<small><span class="pid" data-pid="ch2-p038">ch2-p038</span> · <span class="pid" data-pid="ch2-p046">ch2-p046</span></small>
+</div>
+
+<h2 style="font-weight:normal;margin-top:2rem" data-i18n="contrasth"></h2>
+<div class="variant" style="display:block" id="contrast">
+<blockquote><span class="pid" data-pid="ch1-p006" style="float:right">ch1-p006 ¶</span>"Nature is that which we observe in perception through the senses... self-contained for thought."</blockquote>
+<p data-i18n="contrastx"></p>
+<small><span class="pid" data-pid="ch1-p013">ch1-p013</span></small>
+</div>
+
+<h2 style="font-weight:normal;margin-top:2rem" data-i18n="varh"></h2>
+<button class="vbtn on" id="v1" data-i18n="v1b"></button>
+<button class="vbtn" id="v2" data-i18n="v2b"></button>
+<div id="var1" style="border:1px solid var(--soft);background:#fff;padding:1rem;margin-top:.5rem">
+<p data-i18n="v1x"></p><small><span class="pid" data-pid="ch1-p083">ch1-p083</span></small>
+</div>
+<div id="var2" class="hidden">
+<p><b>1.</b> <span data-i18n="v2a"></span> <span class="pid" data-pid="ch1-p083">ch1-p083</span></p>
+<p><b>2.</b> <span data-i18n="v2b2"></span> <span class="pid" data-pid="ch1-p087">ch1-p087</span></p>
+<p><b>3.</b> <span data-i18n="v2c"></span> <span class="pid" data-pid="ch1-p089">ch1-p089</span></p>
+</div>
+
+<footer style="margin-top:3rem;padding-top:1rem;border-top:1px solid var(--soft);font-size:.8rem;color:#777;font-family:sans-serif">The Concept of Nature · Module I · <a style="color:var(--accent)" href="https://github.com/jonason92/whitehead-concept-of-nature">GitHub repo</a></footer>
+</div>
+
+<div class="modal" id="modal"><div class="box">
+<span class="close" id="mclose">✕</span>
+<h3 id="modalpid" style="font-family:sans-serif"></h3>
+<div id="modaltext"></div>
+</div></div>
+
+<script>
+const I18N={
+en:{title:"The Bifurcation Explorer",
+claim:"Whitehead protests against the bifurcation of nature into two systems of reality which, in so far as they are real, are real in different senses.",
+claimsig:"core claim of module",
+poolhdr:"Assign each property to one of the two poles:",
+poolhint:"drag the dark cards into a zone below",
+z1:"Apparent nature",z1h:"what is apprehended in awareness — drop properties here",
+z2:"Causal nature",z2h:"what causes awareness — drop properties here",
+firebtn:"🔥 Add the fire problem",
+conflictt:"The pivot: one event, two poles",
+conflictx:"The redness and warmth of the fire — assigned above to apparent nature — and the agitation of its molecules — assigned to causal nature — are one and the same event. The bifurcation theory cannot hold them in a single system without confessing it has split nature itself. This is the difficulty that keeps the theory 'dying hard.'",
+contrasth:"The counter-position: nature closed",
+contrastx:"For Whitehead this is not a metaphysical split of nature and mind but a methodical rule: we can think about nature without thinking about thought. The scientific object and the experienced colour belong to one continuous nature.",
+varh:"Depth of the argument (choose your path):",
+v1b:"Conservative — one node",v2b:"Three-fold argument",
+v1x:"The uncritical acceptance of Aristotelian logic breeds the habit of searching beneath everything given in sense-awareness for a substratum.",
+v2a:"The substratum habit: look below the given for its substance.",
+v2b2:"The history: earth, water, air, fire, matter, ether — one continuous tradition.",
+v2c:"The diagnosis: the wrong turn lies in treating space and time as external conditions of existence."},
+de:{title:"Der Bifurkations-Explorer",
+claim:"Whitehead protestiert gegen die Bifurkation der Natur in zwei Realitätssysteme, die, insofern sie real sind, in verschiedenen Sinnen real wären.",
+claimsig:"Kern-Claim des Moduls",
+poolhdr:"Ordne jede Eigenschaft einem der beiden Pole zu:",
+poolhint:"ziehe die dunklen Karten in eine Zone unten",
+z1:"Apparent nature",z1h:"was in der Wahrnehmung erfasst wird — Eigenschaften hier ablegen",
+z2:"Causal nature",z2h:"was die Wahrnehmung verursacht — Eigenschaften hier ablegen",
+firebtn:"🔥 Das Feuer-Problem hinzunehmen",
+conflictt:"Die Kippstelle: ein Ereignis, zwei Pole",
+conflictx:"Rotglut und Wärme des Feuers — oben der apparent nature zugeordnet — und die Erregung seiner Moleküle — der causal nature zugeordnet — sind ein und dasselbe Ereignis. Die Bifurkationstheorie kann sie nicht in einem System halten, ohne einzugestehen, dass sie die Natur selbst gespalten hat. Daran 'stirbt sie schwer'.",
+contrasth:"Die Gegenposition: nature closed",
+contrastx:"Für Whitehead ist das keine metaphysische Spaltung von Natur und Geist, sondern eine methodische Regel: wir können über Natur denken, ohne über Denken zu denken. Das wissenschaftliche Objekt und die erlebte Farbe gehören zu einer kontinuierlichen Natur.",
+varh:"Tiefe des Arguments (Weg wählen):",
+v1b:"Konservativ — ein Knoten",v2b:"Dreifaltiger Argumentationszug",
+v1x:"Die unkritische Übernahme aristotelischer Logik erzeugt die Gewohnheit, unter allem Sinnlich-Gegebenen ein Substrat zu suchen.",
+v2a:"Die Substrat-Gewohnheit: unter dem Gegebenen nach seiner Substanz suchen.",
+v2b2:"Die Geschichte: Erde, Wasser, Luft, Feuer, Materie, Äther — eine kontinuierliche Tradition.",
+v2c:"Die Diagnose: der falsche Weg liegt darin, Raum und Zeit als äußere Existenzbedingungen zu behandeln."}};
+
+function setLang(l){document.documentElement.lang=l;
+document.querySelectorAll('[data-i18n]').forEach(el=>{if(I18N[l][el.dataset.i18n])el.textContent=I18N[l][el.dataset.i18n]});
+localStorage.setItem('wcn-lang',l);}
+
+// Drag & Drop
+document.querySelectorAll('.card').forEach(c=>{
+c.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',c.textContent));});
+document.querySelectorAll('.zone').forEach(z=>{
+z.addEventListener('dragover',e=>e.preventDefault());
+z.addEventListener('drop',e=>{e.preventDefault();
+const t=e.dataTransfer.getData('text/plain');
+const el=document.createElement('span');el.className='card';el.textContent=t;
+el.onclick=()=>{el.remove();document.querySelector('#pool').appendChild(document.createTextNode(' '));};
+z.appendChild(el);checkConflict();});});
+
+// Fire problem
+document.getElementById('btn-fire').onclick=()=>{
+document.getElementById('conflict').style.display='block';
+document.querySelectorAll('.zone').forEach(z=>z.classList.add('pulse','hot'));};
+
+// Variant toggle
+document.getElementById('v1').onclick=()=>{document.getElementById('var1').classList.remove('hidden');document.getElementById('var2').classList.add('hidden');document.getElementById('v1').classList.add('on');document.getElementById('v2').classList.remove('on');};
+document.getElementById('v2').onclick=()=>{document.getElementById('var2').classList.remove('hidden');document.getElementById('var1').classList.add('hidden');document.getElementById('v2').classList.add('on');document.getElementById('v1').classList.remove('on');};
+
+// PID modal: load paragraph from corpus.json
+const modal=document.getElementById('modal');
+async function loadCorpus(){const r=await fetch('../data/corpus.json');return r.json();}
+let CORPUS=null;loadCorpus().then(d=>CORPUS=d);
+document.addEventListener('click',async e=>{
+if(!e.target.classList.contains('pid'))return;
+const pid=e.target.dataset.pid;if(!CORPUS)return;
+for(const ch of CORPUS.chapters){const p=ch.paragraphs.find(x=>x.pid===pid);
+if(p){document.getElementById('modalpid').textContent=pid+' — '+ch.title;
+document.getElementById('modaltext').textContent=p.text;modal.style.display='flex';return;}}});
+document.getElementById('mclose').onclick=()=>modal.style.display='none';
+modal.onclick=e=>{if(e.target===modal)modal.style.display='none'};
+
+// init language
+let l=localStorage.getItem('wcn-lang')||'en';setLang(l);
+</script>
+</body>
+</html>
