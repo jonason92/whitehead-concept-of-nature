@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "work_ref": "whitehead_concept_of_nature_1920",
+    "corpus_ref": "whitehead_corpus_v0.1_2026-09-16.json",
+    "concepts_ref": "concepts_v1.1_2026-11-26.json",
+    "version": "v0.1",
+    "created": "2026-11-26",
+    "editorial_note": "Jedes Modul formuliert einen philosophischen Claim, der ueber claim_pid rueckverfolgbar auf den Originaltext gebunden ist. Die Interaktionsbeschreibung ist Design-Vorgabe fuer die Website; die Realisierung (D3.js, SVG-Animation, interaktive Elemente) folgt im naechsten Arbeitsschritt.",
+    "design_principles": [
+      "Kein Modul praemiert eine Interpretation: das Theoriedorf bleibt offen",
+      "var_expandable-Flag steuert die Aufklapp-Mechanik einheitlich",
+      "Alle claims sind pid-rueckverfolgbar (Reproduzierbarkeit bis auf Absatzebene)"
+    ]
+  },
+  "modules": [
+    {
+      "id": "m_bifurcation_explorer",
+      "title": "Der Bifurkations-Explorer",
+      "chapter_refs": ["ch1", "ch2", "ch9"],
+      "concept_refs": ["c1_nature_closed", "c1_sense_awareness", "c1_substratum_critique", "c2_bifurcation_thesis", "c2_apparent_causal_nature", "c2_psychological_addition", "c2_fire_problem", "c9_activity_passage"],
+      "claim": "Die Bifurkation der Natur in zwei Realitaetssysteme (apparent vs. causal) ist eine theorieerzeugte Konstruktion, nicht eine Struktur der Natur selbst; der Feuer-Fall zeigt die echte Schwierigkeit, die sie verausgabt.",
+      "claim_pid": "ch2-p013",
+      "claim_support_pids": ["ch2-p014", "ch2-p018", "ch2-p038", "ch2-p045", "ch2-p046", "ch9-p001"],
+      "interaction": "Benutzer(innen) ordnen Eigenschaften (Farbe, Waerme, Elektronen, Molekuelbewegung, Gewicht) via Drag-and-Drop den beiden Polen apparent nature / causal nature zu. Das System zeigt live, wo diese Zuordnung je nach Lesart kippt: Der Feuer-Konflikt (rote Glut vs. Molekuel-Agitation) wird als ein Ereignis visualisiert, das beide Polkategorien gleichzeitig beansprucht - die Kippstelle der Theorie. Der Kontrast zur nature-closed-These (Kap. I) wird als Panel eingeblendet.",
+      "variant_mode": {
+        "var_expandable_source": "c1_substratum_critique",
+        "variant_1_label": "Konservativ: substratum critique als ein Knoten",
+        "variant_2_label": "Dreifaltig: habit -> matter history -> wrong turn diagnosis"
+      }
+    },
+    {
+      "id": "m_time_passage",
+      "title": "Passage of Nature - Zeitsysteme im Durchgang",
+      "chapter_refs": ["ch3", "ch5", "ch9"],
+      "concept_refs": ["c3_duration", "c3_simultaneity", "c3_passage_of_nature", "c3_moment", "c5_space_two_senses", "c5_motion_rest_frame", "c5_perpendicularity_time_systems", "c9_activity_passage", "c9_stratification_percipient_event"],
+      "claim": "Zeit ist keine Punktreihe, sondern der Durchgang selbst: durations sind die vollstaendigen Ereignisse; moments sind ideale Grenzprodukte, keine Realitaet. Simultaneitaet ist system-relativ - genau deshalb hat das Gegenwaertige keinen absoluten Schnittpunkt.",
+      "claim_pid": "ch3-p018",
+      "claim_support_pids": ["ch3-p008", "ch3-p012", "ch3-p026", "ch3-p030", "ch3-p031", "ch5-p041", "ch5-p042", "ch5-p040", "ch9-p012", "ch9-p013", "ch9-p006"],
+      "interaction": "Interaktive Two-Slider-Visualisierung: ein Slider verschiebt die Gegenwartsdauer durch eine Ereignislandschaft (Rechtecke = durations); der zweite Slider bestimmt das Zeitsystem (alpha/beta/gamma) - dieselbe Landschaft erscheint mit unterschiedlichen Simultaneitaetsschnitten. Toggle: duration-Ansicht vs. moment-Ansicht. Anmerkung-Ebene: per Aufklapper der Scholem-Kontrapunkt (ewige Gegenwart vs. passage) als Randnotiz optional einblendbar - bewusst nicht in den Graph integriert.",
+      "variant_mode": null
+    },
+    {
+      "id": "m_extensive_abstraction",
+      "title": "Vom Ereignis zum Punkt: der Zoom der extensiven Abstraktion",
+      "chapter_refs": ["ch4", "ch5"],
+      "concept_refs": ["c3_abstractive_set", "c3_moment", "c4_simple_location_rationale", "c4_pathos_of_abstraction", "c4_abstractive_set_extended", "c4_covering_equality", "c4_abstractive_element", "c4_event_particle", "c5_here_station"],
+      "claim": "Punkte sind keine Urbausteine der Natur, sondern Idealisierungen: abstractive sets konvergieren gegen Grenzgebilde (event-particles), die die Einfachheit idealisieren, ohne sie jemals realisiert zu haben. Das Abstrakte traegt die Exaktheit, das Reale bleibt komplex.",
+      "claim_pid": "ch4-p029",
+      "claim_support_pids": ["ch4-p016", "ch4-p017", "ch4-p018", "ch4-p022", "ch4-p024", "ch4-p031", "ch4-p034", "ch4-p038", "ch4-p056", "ch4-p058"],
+      "interaction": "Slider-Zoom: von einer konkreten Ereignislandschaft zoomt man sukzessive in abstractive sets hinein; die quantitative Ausdrucksserie (q(e)) konvergiert sichtbar gegen einen Grenzpunkt, der nie erreicht wird. Zwei Overlay-Ebenen waehlbar: intrinsischer Charakter (Ideal) vs. die tatsaechlichen Ereignisse (Real). Als alternative Sichtweise schaltbar: die Note on the Greek Concept of a Point (S. 197) als separater Randnotiz-Kasten - abweichende, anti-approximative Tradition des Punkts (Euclid-Rekonstruktion ch9-p024).",
+      "variant_mode": null
+    },
+    {
+      "id": "m_congruence",
+      "title": "Kongruenz: messen, messen, messen - und was Bedeutung ist",
+      "chapter_refs": ["ch6", "ch9"],
+      "concept_refs": ["c6_congruence_measurement_theory", "c6_poincare_russell_recognition", "c6_six_axioms", "c6_kinetic_symmetry", "c6_new_theory_advantages", "c6_conventionalism_controversy", "c9_congruence_from_cogredience"],
+      "claim": "Messen ist mehr als ein Verfahren: die einstimmige Kongruenzrelation ist ein Naturfaktor, nicht eine Konvention - und zwar kraft der Verflochtenheit von Raum und Zeit (recognition plus cogredience). Gegenueber Einstein behauptet Whitehead die Ableitbarkeit der kritischen Geschwindigkeit statt ihrer Postulierung.",
+      "claim_pid": "ch6-p010",
+      "claim_support_pids": ["ch6-p001", "ch6-p007", "ch6-p008", "ch6-p009", "ch6-p012", "ch6-p016", "ch6-p021", "ch6-p025", "ch6-p029", "ch6-p044", "ch6-p045", "ch6-p046", "ch9-p016", "ch9-p017", "ch9-p023"],
+      "interaction": "Poincare-vs-Russell-Simulation: Benutzer(innen) positionieren sich auf einer Slider-Skala zwischen Konventionalismus und Beobachtungstatsache; das System zeigt, wie Whiteheads eigene Position beide haelt (both disputants were right). Parallelpanel: Axiom-Check - die sechs Kongruenzaxiome als anklickbare Karteikarten, je mit pid-Verweis. Fuer Fortgeschrittene: Transformationsformeln zwischen Zeitsystemen mit der unbestimmten Konstante als spielbarer Parameter.",
+      "variant_mode": null
+    },
+    {
+      "id": "m_object_ingression",
+      "title": "Der blaue Mantel: Objekte in Ereignissen",
+      "chapter_refs": ["ch7", "ch9"],
+      "concept_refs": ["c7_objects_do_not_pass", "c7_ingression", "c7_object_types", "c7_blue_ingression_classes", "c7_conditioning_active_passive", "c7_perceptual_objects", "c7_scientific_objects", "c9_significance"],
+      "claim": "Objekte vergehen nicht, Ereignisse ja: was ist, ist das Ingredieren von Objekten in Ereignissen - der Charakter eines Ereignisses ist nichts als seine ingredienten Objekte samt ihrer Ingressionsweise. Der blaue Mantel zeigt: jede Situation braucht die ganze Natur.",
+      "claim_pid": "ch7-p004",
+      "claim_support_pids": ["ch7-p001", "ch7-p002", "ch7-p012", "ch7-p018", "ch7-p019", "ch7-p020", "ch7-p021", "ch7-p026", "ch7-p028", "ch7-p029", "ch7-p035", "ch7-p038", "ch7-p042", "ch9-p005"],
+      "interaction": "Interaktive Szene: ein blaues Objekt in einer Raumlandschaft; mit vier Schaltern ordnet man Rollen zu - percipient event / situation / active conditioning / passive conditioning. Aktivierte Rollen hellen die beteiligten Ereigniszonen auf; der Spiegel-Knopf toggelt in den passiven Modus (delusive object). Erfahrene Benutzer(innen) loesen den alle-Natur-Check aus: p019-Zitat als Deep-Zoom auf die Netzstruktur der Beteiligten.",
+      "variant_mode": null
+    }
+  ],
+  "integrations": {
+    "scholem_marginalia": {
+      "status": "geplant, nicht im Graph",
+      "anchor_ref": "c3_passage_of_nature",
+      "description": "Scholems ewige Gegenwart vs. Whiteheads passage of nature als schaltbare Randnotiz-Ebene in m_time_passage - aus dem urspruenglichen Upload-Irrtum (Sept. 2026) wird ein Argument."
+    },
+    "greek_point_note": {
+      "status": "geplant, Overlay in m_extensive_abstraction",
+      "anchor_ref": "c4_event_particle",
+      "description": "Note on the Greek Concept of a Point (S.197) plus Euclid-Rekonstruktion (ch9-p024) als anti-approximative Sichtweise, schaltbar im Zoom-Modul."
+    }
+  }
+}
