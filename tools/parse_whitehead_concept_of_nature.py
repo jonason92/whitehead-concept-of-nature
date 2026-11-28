@@ -23,6 +23,18 @@ EXPECTED_CHAPTERS = [
 ROMAN_TO_INT = {"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5,
                 "VI": 6, "VII": 7, "VIII": 8, "IX": 9}
 
+import re
+from pathlib import Path
+
+def extract_orig_pages(elem):
+    """v1.2: Original-Paginierung (pagenum-Spans) innerhalb eines Absatzes sammeln."""
+    pages = []
+    for span in elem.find_all("span", class_="pagenum"):
+        m = re.search(r"Page\s*(\S+)", span.get("title", "") or "")
+        if m:
+            pages.append(m.group(1))
+    return pages
+
 def clean_text(text):
     return re.sub(r"\s+", " ", text).strip()
 
@@ -78,12 +90,13 @@ def main(output_path="corpus.json"):
             if getattr(node, "name", None) == "p":
                 txt = clean_text(text_of(node))
                 if txt and not txt.startswith("[") and len(txt) > 20:
-                    paragraphs.append(txt)
+                    pages = extract_orig_pages(node)
+                    paragraphs.append({"text": txt, "orig_pages": pages})
             node = node.find_next()
 
         para_records = [
-            {"pid": f"ch{chap_num_int}-p{i:03d}", "text": p}
-            for i, p in enumerate(paragraphs, start=1)
+            {"pid": f"ch{chap_num_int}-p{i:03d}", "text": rec["text"], "orig_pages": rec["orig_pages"]}
+            for i, rec in enumerate(paragraphs, start=1)
         ]
 
         chapters_out.append({
@@ -114,7 +127,7 @@ def main(output_path="corpus.json"):
         },
         "chapters": chapters_out,
         "parser_meta": {
-            "parsed_with": "parse_whitehead_concept_of_nature.py v1.1-fixed",
+            "parsed_with": "parse_whitehead_concept_of_nature.py v1.2",
             "expected_paragraph_total": sum(c["paragraph_count"] for c in chapters_out),
         },
     }

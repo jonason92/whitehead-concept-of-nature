@@ -55,7 +55,7 @@ const btn=document.getElementById('tocbtn'+i);if(btn)btn.classList.add('on');
 const ch=CORPUS.chapters[i];
 const el=document.getElementById('content');
 el.innerHTML='<div class="chaptitle">'+ch.title+'</div>'+
-ch.paragraphs.map(p=>'<p class="para" id="'+p.pid+'"><span class="pidchip">'+p.pid+'</span>'+p.text.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</p>').join('\n');
+ch.paragraphs.map(p=>'<p class="para" id="'+p.pid+'"><span class="pidchip">'+p.pid+'</span>'+(p.orig_pages&&p.orig_pages.length?'<span class="pidchip">p. '+p.orig_pages.join(', ')+'</span>':'')+p.text.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</p>').join('\n');
 if(followHash&&location.hash){const t=document.querySelector(location.hash);if(t)setTimeout(()=>t.scrollIntoView({block:'center'}),60);}
 else window.scrollTo(0,0);
 }
