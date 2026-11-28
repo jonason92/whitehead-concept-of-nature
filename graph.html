@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept Graph — The Concept of Nature</title>
+<style>
+:root{--paper:#faf8f3;--ink:#1b2430;--accent:#6d4aff;--soft:#e8e3d8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;background:var(--paper);color:var(--ink)}
+.wrap{max-width:1160px;margin:0 auto;padding:1.5rem 1.2rem}
+a.back{font-family:sans-serif;font-size:.85rem;color:var(--accent);text-decoration:none}
+h1{font-weight:normal;margin:.4rem 0 .1rem}
+.sub{font-style:italic;color:#666;font-size:.9rem;margin-bottom:1rem}
+#stage{position:relative;background:#fff;border:1px solid var(--soft);height:640px;border-radius:4px;overflow:hidden}
+svg{display:block}
+.legend{display:flex;flex-wrap:wrap;gap:1rem;margin:.8rem 0;font-family:sans-serif;font-size:.78rem;color:#555}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+#panel{position:absolute;top:10px;right:10px;width:290px;max-height:600px;overflow:auto;background:var(--paper);border:1px solid var(--soft);border-radius:6px;padding:.9rem 1rem;font-size:.85rem;display:none;box-shadow:0 4px 14px rgba(27,36,48,.15)}
+#panel h3{font-family:sans-serif;font-size:.95rem;margin:.3rem 0}
+#panel small{font-family:sans-serif;color:#777}
+#panel .pids{font-family:sans-serif;font-size:.72rem;margin-top:.4rem}
+.pid{font-family:sans-serif;font-size:.72rem;background:var(--soft);padding:.05rem .3rem;border-radius:3px;cursor:pointer;margin:1px}
+.pid:hover{background:var(--accent);color:#fff}
+.cluster-head{margin:.6rem 0 .2rem;font-family:sans-serif;font-size:.85rem;font-weight:bold;color:var(--accent)}
+.member{border:1px dashed var(--accent);border-radius:5px;padding:.4rem .6rem;margin:.25rem 0;background:#fff}
+.modal{display:none;position:fixed;inset:0;background:rgba(27,36,48,.6);align-items:center;justify-content:center;z-index:99}
+.modal .box{background:var(--paper);max-width:640px;max-height:80vh;overflow:auto;padding:2rem;border-radius:6px}
+.modal .close{float:right;cursor:pointer;font-family:sans-serif}
+footer{margin-top:1.2rem;padding-top:.8rem;border-top:1px solid var(--soft);font-size:.78rem;color:#777;font-family:sans-serif}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html">&larr; Home</a>
+<h1>Concept Graph</h1>
+<div class="sub">58 concept records &middot; 55 visible nodes &middot; every edge documented in concept_graph_v1.0.json</div>
+<div class="legend">
+<span><span class="dot" style="background:#6d4aff"></span>thesis</span>
+<span><span class="dot" style="background:#2e7d32"></span>method</span>
+<span><span class="dot" style="background:#b8860b"></span>entity</span>
+<span><span class="dot" style="background:#c0392b"></span>relation</span>
+<span><span class="dot" style="background:#1b2430"></span>principle</span>
+<span><span class="dot" style="background:#fff;border:2px dashed #6d4aff"></span>variant cluster (3 voices inside)</span>
+<span>&mdash;&mdash; adjacent &nbsp; &#8594;&#8594; contrasts_with</span>
+</div>
+<div id="stage"><div id="panel"></div></div>
+<footer>Graph: concept_graph_v1.0 &middot; rule-based edges with provenance &middot; <a href="data/concept_graph_v1.0.json">graph JSON</a> &middot; CC BY 4.0</footer>
+</div>
+<div class="modal" id="modal"><div class="box">
+<span class="close" id="mclose">&#10005;</span>
+<h3 id="modalpid" style="font-family:sans-serif"></h3>
+<div id="modaltext" style="margin-top:1rem"></div>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script>
+const TYPE_COLOR={thesis:'#6d4aff',method:'#2e7d32',entity:'#b8860b',relation:'#c0392b',principle:'#1b2430'};
+Promise.all([
+ fetch('data/concept_graph_v1.0.json').then(r=>r.json()),
+ fetch('data/corpus.json').then(r=>r.json())
+]).then(([G,CORPUS])=>{
+const W=1140,H=640;
+const stageEl=document.getElementById('stage');
+const stageW=stageEl.clientWidth||W;
+const scale=Math.min(1,stageW/W);
+const svg=d3.select('#stage').insert('svg',':first-child')
+ .attr('width','100%').attr('viewBox','0 0 '+W+' '+H)
+ .attr('height',H*scale);
+G.nodes.forEach(n=>{n.x=n.seed_x*W;n.y=40+n.seed_y*(H-80);});
+const sim=d3.forceSimulation(G.nodes)
+ .force('link',d3.forceLink(G.edges).id(d=>d.id)
+   .distance(l=>l.kind==='contrasts_with'?210:90).strength(.4))
+ .force('charge',d3.forceManyBody().strength(-270))
+ .force('collide',d3.forceCollide().radius(26))
+ .force('center',d3.forceCenter(W/2,H/2))
+ .force('x',d3.forceX(n=>60+(n.chapter-1)*(W-120)/8).strength(.05))
+ .stop();
+for(let i=0;i<320;i++)sim.tick();
+svg.append('defs').append('marker').attr('id','arrow')
+ .attr('viewBox','0 -5 10 10').attr('refX',18).attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto')
+ .append('path').attr('d','M0,-5L10,0L0,5').attr('fill','#c0392b');
+const link=svg.append('g').selectAll('line').data(G.edges).join('line')
+ .attr('stroke',l=>l.kind==='contrasts_with'?'#c0392b':'#c2bcae')
+ .attr('stroke-width',l=>l.kind==='contrasts_with'?2:1)
+ .attr('stroke-dasharray',l=>l.kind==='contrasts_with'?'6,4':null)
+ .attr('marker-end',l=>l.kind==='contrasts_with'?'url(#arrow)':'')
+ .attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+ .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+const node=svg.append('g').selectAll('circle').data(G.nodes).join('circle')
+ .attr('cx',d=>d.x).attr('cy',d=>d.y)
+ .attr('r',d=>d.variant_cluster?16:11)
+ .attr('fill',d=>d.variant_cluster?'#fff':TYPE_COLOR[d.type])
+ .attr('stroke',d=>d.variant_cluster?'#6d4aff':(TYPE_COLOR[d.type]||'#999'))
+ .attr('stroke-width',d=>d.variant_cluster?2.5:1)
+ .attr('stroke-dasharray',d=>d.variant_cluster?'5,4':null)
+ .style('cursor','pointer')
+ .on('click',(e,d)=>showPanel(d));
+const label=svg.append('g').selectAll('text').data(G.nodes).join('text')
+ .attr('x',d=>d.x+14).attr('y',d=>d.y-12)
+ .attr('font-family','sans-serif').attr('font-size',d=>d.variant_cluster?'11px':'9.5px')
+ .attr('font-weight',d=>d.variant_cluster?'bold':'normal')
+ .attr('fill','#1b2430')
+ .text(d=>d.term.length>26?d.term.slice(0,24)+'\u2026':d.term)
+ .style('cursor','pointer')
+ .on('click',(e,d)=>showPanel(d));
+const panel=document.getElementById('panel');
+window.panel=panel;
+function showPanel(n){
+ let html='<span style="float:right;cursor:pointer;font-family:sans-serif" onclick="panel.style.display=\'none\'">&#10005;</span>';
+ html+='<h3>'+n.term+'</h3>';
+ html+='<small>'+n.id+' &middot; '+n.type+' &middot; Chapter '+n.chapter+'</small>';
+ if(n.summary)html+='<p style="margin:.5rem 0">'+n.summary+'</p>';
+ if(n.variant_cluster){
+  html+='<div class="cluster-head">Variant cluster &mdash; '+n.variant_cluster.members.length+' voices inside</div>';
+  n.variant_cluster.members.forEach((m,i)=>{
+   html+='<div class="member"><b>'+n.variant_cluster.member_terms[i]+'</b><br><small>'+m+'</small></div>';
+  });
+ }
+ let pids=[];
+ if(n.definition_pid)pids.push(n.definition_pid);
+ if(n.key_support_pids)pids=pids.concat(n.key_support_pids.slice(0,4));
+ if(pids.length)html+='<div class="pids">'+pids.map(p=>'<span class="pid" data-pid="'+p+'">'+p+'</span>').join(' ')+'</div>';
+ panel.innerHTML=html;
+ panel.style.display='block';
+}
+document.addEventListener('click',e=>{
+ const t=e.target;
+ if(!t.classList||!t.classList.contains('pid'))return;
+ const pid=t.dataset.pid;if(!CORPUS)return;
+ const secs=(CORPUS.chapters||[]).concat(CORPUS.notes||[]);
+ for(const sec of secs){const p=sec.paragraphs.find(x=>x.pid===pid);
+  if(p){document.getElementById('modalpid').textContent=pid+' \u2014 '+sec.title;
+   document.getElementById('modaltext').textContent=p.text;
+   document.getElementById('modal').style.display='flex';return;}}
+});
+document.getElementById('mclose').onclick=()=>document.getElementById('modal').style.display='none';
+document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')e.target.style.display='none'};
+}).catch(err=>{document.getElementById('stage').innerHTML='<div style="padding:2rem;font-family:sans-serif;color:#a33">Load error: '+err.message+'</div>'});
+</script>
+</body>
+</html>

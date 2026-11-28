@@ -1,0 +1,2044 @@
+{
+ "meta": {
+  "generated_from": "data/concepts_v1.1_2026-11-26.json",
+  "generator": "tools/build_concept_graph.py v1.0",
+  "generated_at": "2026-11-28",
+  "node_count": 55,
+  "edge_count": 105,
+  "edge_vocabulary": {
+   "adjacent": "symmetric; both concepts co-referenced in concepts records (related-field)",
+   "contrasts_with": "directed; explicit contrast-field in concepts records"
+  },
+  "variant_clusters": {
+   "c1_substratum_critique": [
+    "c1_substratum_habit",
+    "c1_matter_history",
+    "c1_matter_hybrid_diagnosis"
+   ]
+  },
+  "collapsed_nodes": [
+   "c1_matter_history",
+   "c1_matter_hybrid_diagnosis",
+   "c1_substratum_habit"
+  ],
+  "fixes_applied": [
+   {
+    "fix": "dangling related-ref redirected",
+    "record": "c3_passage_of_nature",
+    "from": "c3_convergence_moments",
+    "to": "c3_moment",
+    "provenance": "editorial decision recorded in concepts changelog v0.x; applied late to graph level"
+   }
+  ],
+  "layout": "force-directed in frontend with deterministic seeds (seed_x/seed_y from sha1 of node id); organic but reproducible",
+  "skipped_dangling_refs": []
+ },
+ "nodes": [
+  {
+   "id": "c1_nature_closed",
+   "term": "Nature closed (to mind)",
+   "type": "thesis",
+   "chapter": 1,
+   "definition_pid": "ch1-p006",
+   "key_support_pids": [
+    "ch1-p007",
+    "ch1-p013"
+   ],
+   "summary": "Natur ist das in Sinneswahrnehmung Beobachtete und 'self-contained for thought': wir koennen ueber Natur denken, ohne ueber Denken zu denken. Explizit KEINE metaphysische Trennung von Natur und Geist, sondern methodische Regel.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.768,
+   "seed_y": 0.263
+  },
+  {
+   "id": "c1_sense_awareness",
+   "term": "Sense-awareness",
+   "type": "entity",
+   "chapter": 1,
+   "definition_pid": "ch1-p012",
+   "key_support_pids": [
+    "ch1-p010",
+    "ch1-p068",
+    "ch1-p070"
+   ],
+   "summary": "Das nicht-gedankliche Ingredient der Sinneswahrnehmung. Naturwissenschaft ist auf Natur als terminus der Wahrnehmung gerichtet, nicht auf die awareness selbst (p010). Erkenntnisimmanente Charaktere der Natur sind 'impenetrable by thought' (p070).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.952,
+   "seed_y": 0.173
+  },
+  {
+   "id": "c1_homogeneous_thought",
+   "term": "Homogeneous vs. heterogeneous thought",
+   "type": "principle",
+   "chapter": 1,
+   "definition_pid": "ch1-p007",
+   "key_support_pids": [
+    "ch1-p008"
+   ],
+   "summary": "Homogen: Natur denken ohne Denken mitzudenken (Modus der Naturwissenschaft). Heterogen: Natur unter Rueckbezug auf das Denken derselben denken. Whitehead erhebt fuer die Vorlesungen den homogenen Standpunkt.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.258,
+   "seed_y": 0.162
+  },
+  {
+   "id": "c1_fact_factors_entities",
+   "term": "Fact / factors / entities",
+   "type": "principle",
+   "chapter": 1,
+   "definition_pid": "ch1-p071",
+   "key_support_pids": [
+    "ch1-p069",
+    "ch1-p072"
+   ],
+   "summary": "Drei Komponenten der Naturerkenntnis: Fakt = undifferenzierter terminus der sense-awareness; Faktoren = differenzierte Elemente im Fakt; Entitaeten = termini des Denkens, denen Individualitaet zugesprochen wird. Zentralschema fuer den gesamten Konzeptgraphen.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.905,
+   "seed_y": 0.565
+  },
+  {
+   "id": "c1_event",
+   "term": "Event",
+   "type": "entity",
+   "chapter": 1,
+   "definition_pid": "ch1-p074",
+   "key_support_pids": [
+    "ch1-p076"
+   ],
+   "summary": "Faktoren, die durch Erkennung der Erweiterung innerhalb des Fakt hervorgehen ('taking-out' of nature, p074). Sensa wie sky-blue sind keine events, sondern situiert IN events (p076) - situation als eigene Relation, vertieft in spaeteren Vorlesungen.",
+   "editorial_status": "verified_definition_partial",
+   "seed_x": 0.384,
+   "seed_y": 0.821
+  },
+  {
+   "id": "c1_situation",
+   "term": "Situation",
+   "type": "relation",
+   "chapter": 1,
+   "definition_pid": "ch1-p076",
+   "key_support_pids": [
+    "ch1-p031"
+   ],
+   "summary": "Relation, vermoege deren ein Sinnendatum (z.B. sky-blue) in einem event situiert ist. p031 ergaenzt: Die Entitaet daemmert am Beobachter auf 'because of its relations'. Rueckverweis auf spaere Kapitel (situation braucht dort vertiefte Behandlung).",
+   "editorial_status": "verified_definition_partial",
+   "seed_x": 0.097,
+   "seed_y": 0.77
+  },
+  {
+   "id": "c1_substratum_critique",
+   "term": "Critique of the substratum (Aristotelian heritage)",
+   "type": "thesis",
+   "chapter": 1,
+   "definition_pid": "ch1-p083",
+   "key_support_pids": [
+    "ch1-p087",
+    "ch1-p089",
+    "ch1-p096"
+   ],
+   "summary": "Die unkritische Akzeptanz der aristotelischen Logik fuehrt zur Gewohnheit, hinter allem in sense-awareness Gegebenen ein Substrat zu suchen - Erde/Wasser/Luft/Feuer bis zum Aether. Ursprung: unaufgeklaerte Annahme von Raum und Zeit als aeusserer Existenzbedingungen (p089). Diagnose: 'wrong turn' der Naturphilosophie im griechischen Denken (p096).",
+   "editorial_status": "verified_definition",
+   "variant_cluster": {
+    "base": "c1_substratum_critique",
+    "members": [
+     "c1_substratum_habit",
+     "c1_matter_history",
+     "c1_matter_hybrid_diagnosis"
+    ],
+    "member_terms": [
+     "Substratum habit (search beneath the given)",
+     "History of the doctrine of matter (Ionians to ether)",
+     "Wrong turn diagnosis (space/time as external conditions)"
+    ]
+   },
+   "seed_x": 0.374,
+   "seed_y": 0.323
+  },
+  {
+   "id": "c2_bifurcation_thesis",
+   "term": "Bifurcation of nature (protested thesis)",
+   "type": "thesis",
+   "chapter": 2,
+   "definition_pid": "ch2-p013",
+   "key_support_pids": [
+    "ch2-p017",
+    "ch2-p046"
+   ],
+   "summary": "Whiteheads Kernangriff: die Spaltung der Natur in zwei Realitaetssysteme, die in verschiedenen Sinnen real waeren (Elektronen vs. gegebene Natur). Keine bloesse Theoriekritik, sondern Verstooss gegen die im Kapitel-I-Zug A errichtete methodische Regel (nature closed). 'Dies hard' (p046).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.518,
+   "seed_y": 0.188
+  },
+  {
+   "id": "c2_apparent_causal_nature",
+   "term": "Apparent nature / causal nature",
+   "type": "principle",
+   "chapter": 2,
+   "definition_pid": "ch2-p014",
+   "key_support_pids": [
+    "ch2-p016",
+    "ch2-p031",
+    "ch2-p038"
+   ],
+   "summary": "Standardform der Bifurkation: die in awareness apprehendete Natur vs. diejenige, welche die Ursache der awareness ist. Causal nature ist nicht 'Teil der Natur als Ursache eines anderen Teils' (p016, dort abgegrenzt). P038 bringt das Feuer-Beispiel: diete rote Glut vs. Molekuel-Erregung.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.949,
+   "seed_y": 0.615
+  },
+  {
+   "id": "c2_bifurcation_critique_rescue_attempts",
+   "term": "Rescue attempts and failure of the bifurcation theory",
+   "type": "thesis",
+   "chapter": 2,
+   "definition_pid": "ch2-p047",
+   "key_support_pids": [
+    "ch2-p045",
+    "ch2-p031",
+    "ch2-p035"
+   ],
+   "summary": "Ueberblick ueber die Loesungs- und Retungsversuche: (a) absolute Zeit/Raum (p031), (b) relational space (p040), (c) 'puristisch-konzeptualistische' Rueckzugsform: Molekuele/Ether als rein begrifflich (p047, schwaechest Form). Scheitern: keine fundamentale Distinktion etablierbar (p045). Argumentationszug laeuft parallel zum Kap.-I-Zug C (Substrat-Geschichte).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.335,
+   "seed_y": 0.037
+  },
+  {
+   "id": "c2_psychological_addition",
+   "term": "Mind's additions / psychological accretions",
+   "type": "thesis",
+   "chapter": 2,
+   "definition_pid": "ch2-p014",
+   "key_support_pids": [
+    "ch2-p018"
+   ],
+   "summary": "Die andere klassische Form: alle sekundaeren Qualitaeten (rot, warm) sind psychische Zuschreibungen, Primarqualitaeten bleiben 'in der Natur'. Whitehead verwirft dies als Variante derselben Bifurkation (p018: 'strong suit' der Kausaltheorie ist die Schwierigkeit, Rot und Molekuel-Agititation in einem System zu vereinen – was er spaeter durch ingression loest).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.377,
+   "seed_y": 0.758
+  },
+  {
+   "id": "c2_fire_problem",
+   "term": "Fire problem (redness vs. molecular agitation)",
+   "type": "principle",
+   "chapter": 2,
+   "definition_pid": "ch2-p038",
+   "key_support_pids": [
+    "ch2-p018",
+    "ch2-p046"
+   ],
+   "summary": "Das Leitbeispiel der Debatte: Rotglut und Waerme des Feuers vs. Agitation der Molekuele – wie sind beide dasselbe Ereignis? Fuer Whitehead das reale Problem hinter der Versuchung zur Bifurkation; seine Loesung (Ingredienz/ingression von Objekten in Ereignisse) wird erst in spaeteren Vorlesungen gegeben (Ankuendigung p046).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.687,
+   "seed_y": 0.581
+  },
+  {
+   "id": "c3_duration",
+   "term": "Duration",
+   "type": "entity",
+   "chapter": 3,
+   "definition_pid": "ch3-p008",
+   "key_support_pids": [
+    "ch3-p006",
+    "ch3-p011",
+    "ch3-p019"
+   ],
+   "summary": "Die ganze gleichzeitige Okkurrenz der Natur, 'now for sense-awareness' (p008). Durations sind die einzigen komplettierten events (p019); ihre Einzigkeit ist doppelt: fuer ein individuelles und fuer alle operierenden Bewusstseine (p011). Stuetzt den c1_event-Record (saettigt dessen partial-Status vor der Kap.-III-Runde exakt wie vereinbart).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.869,
+   "seed_y": 0.213
+  },
+  {
+   "id": "c3_simultaneity",
+   "term": "Simultaneity vs. instantaneousness",
+   "type": "principle",
+   "chapter": 3,
+   "definition_pid": "ch3-p012",
+   "key_support_pids": [
+    "ch3-p008"
+   ],
+   "summary": "Explizite Differenzierung: Gleichzeitigkeit (Ausdehnung ueber die ganze simultane Natur) ist nicht Instantaneitaet (mangelnde Zeitausdehnung). Gegen Ersetzung des Gegenwaertigen durch den Zeitpunkt: 'an instant of time without duration is nothing' (p012-Zusammenhang).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.213,
+   "seed_y": 0.166
+  },
+  {
+   "id": "c3_passage_of_nature",
+   "term": "Passage of nature",
+   "type": "thesis",
+   "chapter": 3,
+   "definition_pid": "ch3-p018",
+   "key_support_pids": [
+    "ch3-p044",
+    "ch3-p037"
+   ],
+   "summary": "Extension zeigt in Gedanken eine Seite des ultimativen Wanderns (passage) der Natur (p018). P044: passage of mind ist vom passage of nature unterscheidbar, eng verwandt; p037: Zeit reicht in gewissem Sinne ueber die Natur hinaus ('transcendence of time'). Kernthese gegen punktuelle Zeitauffassung; hier spaeter der Scholem-Kontrapunkt (ewige Gegenwart) anzusetzen.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.486,
+   "seed_y": 0.363
+  },
+  {
+   "id": "c3_abstractive_set",
+   "term": "Abstractive set (durations converging to ideal instant)",
+   "type": "method",
+   "chapter": 3,
+   "definition_pid": "ch3-p026",
+   "key_support_pids": [
+    "ch3-p025",
+    "ch3-p030"
+   ],
+   "summary": "Methode: Familien ineinander geschachtelter durations, die entlang der Ordnung gegen das Ideal 'aller Natur ohne zeitliche Ausdehnung' konvergieren (p026). Asymmetrie/Transitivitaet von Ganz-Part (p025), boundary moments (p030). Fundament der extensiven Abstraktion (Kap. IV-Vorbereitung).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.874,
+   "seed_y": 0.592
+  },
+  {
+   "id": "c3_moment",
+   "term": "Moment (ideal limit of duration)",
+   "type": "entity",
+   "chapter": 3,
+   "definition_pid": "ch3-p026",
+   "key_support_pids": [
+    "ch3-p030",
+    "ch3-p031"
+   ],
+   "summary": "Der Moment als idealer Grenzwert konvergierender durations - kein reales Ereignis, sondern Abstraktionsprodukt (Gegensatz zur sensualistischen Zeitauffassung). Momente bilden Familien; 'inside/outside' eines gegebenen duration (p031), boundary moments (p030).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.644,
+   "seed_y": 0.516
+  },
+  {
+   "id": "c3_materialistic_trinity_gap",
+   "term": "Gap between materialistic trinity and sense-awareness",
+   "type": "thesis",
+   "chapter": 3,
+   "definition_pid": "ch3-p047",
+   "key_support_pids": [],
+   "summary": "Fortsetzung der Kap.-I/II-Diagnose auf zeitlichem Terrain: die materialistische Trinitaet (raumzeitliche Punkte, Materie, instant?) klafft weit von den unmittelbaren Auskuenden der sense-awareness weg. Verbindet c1_substratum_critique mit der Zeit-Analyse.",
+   "editorial_status": "verified_definition_summary_pending",
+   "seed_x": 0.676,
+   "seed_y": 0.643
+  },
+  {
+   "id": "c4_simple_location_rationale",
+   "term": "Simple location (rationale of exact observation)",
+   "type": "principle",
+   "chapter": 4,
+   "definition_pid": "ch4-p016",
+   "key_support_pids": [
+    "ch4-p017",
+    "ch4-p015"
+   ],
+   "summary": "Der Leitgedanke der exacten Beobachtung: Beziehungen zwischen Teilen von Ereignissen (A', B') sind einfacher als zwischen den Ganzen (A, B). Systematische Nutzung dieses Gesetzes ergab die abstrakten Begriffe von Zeit und Raum (p017). p015 verweist auf 'the principle of convergence' als 'clue discovered by the common sense of mankind'.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.558,
+   "seed_y": 0.925
+  },
+  {
+   "id": "c4_pathos_of_abstraction",
+   "term": "Ideal simplicity vs. actual events (intrinsic character)",
+   "type": "thesis",
+   "chapter": 4,
+   "definition_pid": "ch4-p029",
+   "key_support_pids": [
+    "ch4-p028"
+   ],
+   "summary": "Abstractive sets indicate an ideal simplicity of natural relations, 'though this simplicity is not the character of any actual event' (p028). Limitierender Charakter = 'intrinsic character' des sets; die definierenden Ganz-Part-Eigenschaften = dessen 'assignment'. Approximation numerisch beliebig eng moeglich, aber das Limit ist kein reales Ereignis - Kern der Abstraktions-Dialektik und des Zoom-Moduls.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.787,
+   "seed_y": 0.241
+  },
+  {
+   "id": "c4_abstractive_set_extended",
+   "term": "Abstractive set (extended to all limited events)",
+   "type": "method",
+   "chapter": 4,
+   "definition_pid": "ch4-p018",
+   "key_support_pids": [
+    "ch4-p022",
+    "ch4-p024"
+   ],
+   "summary": "Generalisierung des Kap.-III-Begriffs: substitution of 'duration' durch 'event' - jede Serie ineinander geschachtelter Ereignisse ohne letztes Glied konvergiert; die Ereignisserie selbst konvergiert 'to nothing' (p022), die quantitative quantitative Ausdrucksserie dagegen zu einem definite limit l(s) (p024).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.793,
+   "seed_y": 0.583
+  },
+  {
+   "id": "c4_covering_equality",
+   "term": "Covering / equality in abstractive force",
+   "type": "relation",
+   "chapter": 4,
+   "definition_pid": "ch4-p031",
+   "key_support_pids": [
+    "ch4-p032",
+    "ch4-p033",
+    "ch4-p034"
+   ],
+   "summary": "p covers q, wenn jedes p-Glied einige q-Glieder als Teile enthaelt (p031). Gegenseitiges Covering = 'equal in abstractive force' (p032);Importance: Identitaet der intrinsic characters als Bedingung der exacten Beobachtung (p033).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.137,
+   "seed_y": 0.971
+  },
+  {
+   "id": "c4_abstractive_element",
+   "term": "Abstractive element",
+   "type": "entity",
+   "chapter": 4,
+   "definition_pid": "ch4-p034",
+   "key_support_pids": [
+    "ch4-p037",
+    "ch4-p038"
+   ],
+   "summary": "Die ganze Gruppe zueinander gleicher abstractive sets (p034). Abstractive elements sind 'the fundamental elements of space and time' (p037) und 'in some sense the points of space' (p038) - aber auch fuer Zeit (moments) und generale Relationen.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.347,
+   "seed_y": 0.949
+  },
+  {
+   "id": "c4_event_particle",
+   "term": "Event-particle and punct (route of approximation)",
+   "type": "entity",
+   "chapter": 4,
+   "definition_pid": "ch4-p056",
+   "key_support_pids": [
+    "ch4-p057",
+    "ch4-p058",
+    "ch4-p049"
+   ],
+   "summary": "Event-particle = route of approximation, markiert durch in sense-awareness posierte Entitaeten (p056); formal die Klasse der σ-prime abstractive sets (p057). Punct = assoziierte route in timeless space, gewinnt 'derived character as a route of approximation from its association with the event-particle' (p058). p049: zwei Attribute jedes event-particle (Gegenstandspaar fuer Zoom-Modul).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.636,
+   "seed_y": 0.505
+  },
+  {
+   "id": "c5_percipient_event_cogredience",
+   "term": "Percipient event and cogredience",
+   "type": "entity",
+   "chapter": 5,
+   "definition_pid": "ch5-p024",
+   "key_support_pids": [
+    "ch5-p023",
+    "ch5-p031",
+    "ch5-p026"
+   ],
+   "summary": "Der percipient event als Fokus-Faktor in der Natur: die Natur wird auf ein bestimmtes Ereignis hin wahrgenommen, das Teil der assoziierten duration ist (p024). Cogredience = praktische Passung des operativen Vergangenen des Ereignisses in die duration (p031). p026 diagnostiziert die Verleitung zum two-termed-relations-Irrtum (Geist-vs-Faktor), der die bifurcation naehrt.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.221,
+   "seed_y": 0.46
+  },
+  {
+   "id": "c5_here_station",
+   "term": "Here / station (absolute position in timeless space)",
+   "type": "entity",
+   "chapter": 5,
+   "definition_pid": "ch5-p028",
+   "key_support_pids": [
+    "ch5-p032",
+    "ch5-p019",
+    "ch5-p038"
+   ],
+   "summary": "Der 'here'-Charakter des percipient event in der short present duration (p028). Stationen = spezielle vagrant routes, die absolute Position in der assoziierten timeless space definieren (p032). p019: relative space impliziert keine Abschaffung absoluter Position - 'mistake' laut Whitehead. p038: Stationen gleicher duration schneiden sich nicht; jede event-particle hat genau eine station je duration.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.197,
+   "seed_y": 0.261
+  },
+  {
+   "id": "c5_space_two_senses",
+   "term": "Timeless vs. instantaneous space",
+   "type": "principle",
+   "chapter": 5,
+   "definition_pid": "ch5-p041",
+   "key_support_pids": [
+    "ch5-p017",
+    "ch5-p039"
+   ],
+   "summary": "Timeless spaces = Raeume der physikalischen Wissenschaft, 'eternal and unchanging', je ein spaces pro time-system (p039). Instantaneous spaces = wahrnehmbare Approximationen im Glanzblick (p041). Das Vergleichsproblem zwischen beiden: 'method of comparison of position in one instantaneous space with positions in other instantaneous spaces' (p017).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.56,
+   "seed_y": 0.263
+  },
+  {
+   "id": "c5_motion_rest_frame",
+   "term": "Motion and rest as frame-relative",
+   "type": "principle",
+   "chapter": 5,
+   "definition_pid": "ch5-p042",
+   "key_support_pids": [
+    "ch5-p018",
+    "ch5-p040"
+   ],
+   "summary": "Bewegung ist wesenhaft Relation zwischen einem Naturobjekt und der one timeless space eines time-systems (p042). Ruhe = Verharren an denselben event-particles eines Punkts quer durch die Momente von alpha (p040), relativ zu jenem System. Bewegung ist 'physical fact' (p018), setzt Ruhe voraus - gegen rein relationale Verfluechtigungen.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.674,
+   "seed_y": 0.034
+  },
+  {
+   "id": "c5_vagrant_duratesolid",
+   "term": "Vagrant and durate solids",
+   "type": "relation",
+   "chapter": 5,
+   "definition_pid": "ch5-p006",
+   "key_support_pids": [
+    "ch5-p004",
+    "ch5-p005",
+    "ch5-p010"
+   ],
+   "summary": "Adjoined events teilen eine 3-dimensionale Grenzflaeche (= solid); liegt diese komplett in einem Moment = durate/'complete' solid, sonst 'vagrant' solid (p006). p010: Das Umfasstsein von Volumen durch Begrenzungsflaeche ist 'the origin of the Dedekindian continuity of space' - wichtige Bruecke zur mathematischen Kontinuum-Konstruktion.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.616,
+   "seed_y": 0.849
+  },
+  {
+   "id": "c5_rectilinear_routes",
+   "term": "Rectilinear routes and stations (two route types)",
+   "type": "relation",
+   "chapter": 5,
+   "definition_pid": "ch5-p014",
+   "key_support_pids": [
+    "ch5-p015",
+    "ch5-p035"
+   ],
+   "summary": "Momental routes als abstractive elements von momental segments (p014). Zwei gerade Routentypen: rectilinear routes (liegen 'in rects', momental) vs. stations (vagrant, durat, define absolute position) (p015). Cogredience kann an Teilen scheitern - zwei Fail-Wege (p035).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.69,
+   "seed_y": 0.281
+  },
+  {
+   "id": "c5_perpendicularity_time_systems",
+   "term": "Perpendicularity across time-systems",
+   "type": "principle",
+   "chapter": 5,
+   "definition_pid": "ch5-p044",
+   "key_support_pids": [
+    "ch5-p043",
+    "ch5-p045"
+   ],
+   "summary": "Das fundamentale Kreuzungs-Property: level λ senkrecht zur beta-Richtung im Moment M von alpha, und level λ senkrecht zur alpha-Richtung im Moment N von beta (p044). Verallgemeinerung auf timeless spaces (p045). Grundlag für Whiteheads Schilderung der Mess-Symmetrien zwischen Zeitsystemen.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.354,
+   "seed_y": 0.32
+  },
+  {
+   "id": "c6_congruence_measurement_theory",
+   "term": "Congruence as theory of measurement",
+   "type": "principle",
+   "chapter": 6,
+   "definition_pid": "ch6-p001",
+   "key_support_pids": [
+    "ch6-p002",
+    "ch6-p003"
+   ],
+   "summary": "It is the theory of measurement in space and in time (p001): scheinbar simpel - settled by act of parliament - aber procedure is one thing and its meaning is another. Mathematisch: Kongruenz von Segmenten entspricht Gleichheit ihrer quantitativen Messungen (p002); moderne Axiomatik setzt Bedingungen fuer die Kongruenzrelation (p003).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.148,
+   "seed_y": 0.539
+  },
+  {
+   "id": "c6_poincare_russell_recognition",
+   "term": "Poincare-Russell controversy and recognition",
+   "type": "thesis",
+   "chapter": 6,
+   "definition_pid": "ch6-p007",
+   "key_support_pids": [
+    "ch6-p008",
+    "ch6-p009",
+    "ch6-p012"
+   ],
+   "summary": "Poincare: kein Naturfaktor praemiert EINE Kongruenzrelation vor dem indefinite herd anderer (p007). Russell: als Beobachtungstatsache findet die Menschheit einstimmig dieselbe Kongruenzrelation (p009). Whitehead: both disputants were right auf geteiltem Boden (p008) - seine Theorie loest, indem sie den praemierenden Faktor benennt (p010/p011: Verflochtenheit von Raum und Zeit). Fundament: Kongruenz als fundamental fact of recognition (p012).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.314,
+   "seed_y": 0.475
+  },
+  {
+   "id": "c6_six_axioms",
+   "term": "Six axioms of congruence",
+   "type": "method",
+   "chapter": 6,
+   "definition_pid": "ch6-p021",
+   "key_support_pids": [
+    "ch6-p022",
+    "ch6-p023",
+    "ch6-p024",
+    "ch6-p028"
+   ],
+   "summary": "Axiombau: (1) Parallelogrammseiten kongruent (p021), (2) Parallelogramme auf kongruenten Basen (p022), (3)+(4) Perpendicularity-Axiome (p023, p024), (5) kinetische Symmetrie, (6) Transitivitaet - fuer den Raum abgeleitet, fuer die Zeit notwendig (p028).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.036,
+   "seed_y": 0.012
+  },
+  {
+   "id": "c6_kinetic_symmetry",
+   "term": "Kinetic symmetry and cross-system transformations",
+   "type": "principle",
+   "chapter": 6,
+   "definition_pid": "ch6-p025",
+   "key_support_pids": [
+    "ch6-p026",
+    "ch6-p029",
+    "ch6-p017"
+   ],
+   "summary": "Axiom der kinetischen Symmetrie: Symmetrie der Bewegungen zwischen Zeitsystemen (p025). Beta-Richtung in alpha = Richtung der Bewegung im alpha-Raum, die Ruhe in einem beta-Punkt entspricht (p026). Daraus: Transformationsformeln zwischen Messungen verschiedener Zeitsysteme mit einer unbestimmten Konstante (p029). P017: Kongruenz haengt an Bewegung - Connexion zwischen raeumlicher und zeitlicher Kongruenz.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.915,
+   "seed_y": 0.635
+  },
+  {
+   "id": "c6_new_theory_advantages",
+   "term": "New theory vs. orthodox view (time congruence, laws of motion)",
+   "type": "thesis",
+   "chapter": 6,
+   "definition_pid": "ch6-p044",
+   "key_support_pids": [
+    "ch6-p045",
+    "ch6-p046",
+    "ch6-p010",
+    "ch6-p011"
+   ],
+   "summary": "Die neue Theorie liefert eine Definition der Kongruenz von Zeitperioden; die vorherrschende Ansicht liefert keine, sondern setzt Zeitmessung per familiar velocities als gegeben (p044). Bewegungsgesetze: orthodox voellig ambigu in Raum- und Zeitbezug - fishing expedition (p046); neue Theorie erklaert ihre Gueltigkeitsachsen (p045). Kern: nature is no longer confined within space at an instant (p011).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.729,
+   "seed_y": 0.575
+  },
+  {
+   "id": "c6_conventionalism_controversy",
+   "term": "Congruence as conventional question (procedure vs. meaning)",
+   "type": "thesis",
+   "chapter": 6,
+   "definition_pid": "ch6-p016",
+   "key_support_pids": [
+    "ch6-p001",
+    "ch6-p048"
+   ],
+   "summary": "Konventionalistischer Aspekt: Identitaet der Qualitaet kongruenter Segmente ist meist Inferenz aus Messprozeduren, nicht direkte Wahrnehmung (p016). Parlaments-Pointe (p001): das Verfahren per Gesetz fixierbar, seine Bedeutung nicht. P048 rettet die Alltagsordnung: Zeitmessung bestaende lange vor den Bewegungsgesetzen - die Gesetze gelten im Raum des taeglichen Lebens.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.518,
+   "seed_y": 0.713
+  },
+  {
+   "id": "c7_objects_do_not_pass",
+   "term": "Objects do not pass (recognition)",
+   "type": "entity",
+   "chapter": 7,
+   "definition_pid": "ch7-p001",
+   "key_support_pids": [
+    "ch7-p003"
+   ],
+   "summary": "Objekte sind Elemente der Natur, die nicht vergehen; ihre Awareness als nicht-wandelnder Faktor ist 'recognition'. Ein Ereignis kann nicht erkannt werden, nur beachtet (p001). p003: Dauerhaftigkeiten, die Recognition entziehen, erscheinen als abstrakte Eigenschaften - trotzdem fuer recognition da.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.689,
+   "seed_y": 0.949
+  },
+  {
+   "id": "c7_ingression",
+   "term": "Ingression (general relation of objects to events)",
+   "type": "relation",
+   "chapter": 7,
+   "definition_pid": "ch7-p004",
+   "key_support_pids": [
+    "ch7-p002",
+    "ch7-p005"
+   ],
+   "summary": "Ingression bezeichnet die allgemeine Relation von Objekten zu Ereignissen: das Hineinwirken des Charakters eines Ereignisses kraft des Seins des Objekts in ihm (p004). p002: Der Charakter eines Ereignisses ist nichts als die in ihmingredienten Objekte und ihre Weisen des Eingangs. p005: Ingression hat verschiedene Modi - je Objekttyp eigene Relationsformen.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.912,
+   "seed_y": 0.234
+  },
+  {
+   "id": "c7_object_types",
+   "term": "Radically different object types",
+   "type": "principle",
+   "chapter": 7,
+   "definition_pid": "ch7-p012",
+   "key_support_pids": [
+    "ch7-p038"
+   ],
+   "summary": "Objekte sind von radikal verschiedenen Typen; fuer jeden Typ haben 'situation' und 'ingression' eigene Bedeutung (p012). p038: Die Situation ist je Typ eine ANDERE Relation; bei Sinnobjekten nicht als two-termed-Relation ausdrueckbar - direkter Angriff auf den naive Repraesentationalismus.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.423,
+   "seed_y": 0.222
+  },
+  {
+   "id": "c7_blue_ingression_classes",
+   "term": "Four classes of events in the ingression of blue",
+   "type": "relation",
+   "chapter": 7,
+   "definition_pid": "ch7-p020",
+   "key_support_pids": [
+    "ch7-p018",
+    "ch7-p019"
+   ],
+   "summary": "Anleitung am Cambridge-blauen Mantel: (i) percipient events, (ii) situations, (iii) active conditioning events, (iv) passive conditioning events (p020) - ueberlappende, unscharf geschiedene Klassen. p019: Die Situation des Blau erfordert ALLE Natur (Relation Blau/perzipierendes Ereignis/Situation/vermittelnde Ereignisse).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.456,
+   "seed_y": 0.559
+  },
+  {
+   "id": "c7_conditioning_active_passive",
+   "term": "Active vs. passive conditioning (mirror)",
+   "type": "principle",
+   "chapter": 7,
+   "definition_pid": "ch7-p021",
+   "key_support_pids": [
+    "ch7-p022",
+    "ch7-p026"
+   ],
+   "summary": "Situationen sind im Allgemeinen aktive Konditionierungen der Ingression; der Spiegel zeigt den passiven Fall (p021). p022 verteidigt: ALLES Wissen ueber Ereignischaraktere beruht auf der Analyse solcher Situations-Relationen - waeren Situationen nicht generell aktiv, waere die Analyse grundlos. p026: Gesetz, dass eine Situation Situation VIELER Sinnobjekte fuer VIELE percipient events ist.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.637,
+   "seed_y": 0.782
+  },
+  {
+   "id": "c7_perceptual_objects",
+   "term": "Perceptual objects (delusive vs. physical)",
+   "type": "entity",
+   "chapter": 7,
+   "definition_pid": "ch7-p028",
+   "key_support_pids": [
+    "ch7-p029",
+    "ch7-p030"
+   ],
+   "summary": "Zwei Arten: delusive perceptual objects (passive Bedingung ihrer eigenen Ingression) vs. physical objects (aktive Konditionierung der Ingression ihrer Komponenten-Sinnobjekte UND Wiedererkennbarkeit desselben Ereignischarakters, p029). p030: Situationen physikalischer Objekte sind durch Einzigkeit (als Ideal-Grenze) und Kontinuitaet bedingt.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.38,
+   "seed_y": 0.528
+  },
+  {
+   "id": "c7_scientific_objects",
+   "term": "Scientific objects (electron as systematic correlation)",
+   "type": "entity",
+   "chapter": 7,
+   "definition_pid": "ch7-p035",
+   "key_support_pids": [
+    "ch7-p009",
+    "ch7-p034",
+    "ch7-p042",
+    "ch7-p043"
+   ],
+   "summary": "Wissenschaftliche Objekte wie das Elektron: systematische Korrelation der Charaktere ALLER Ereignisse durch alle Natur - ein Aspekt des systematischen Charakters der Natur; 'not merely where its charge is' (p035). Ursprung wissenschaftlicher Erkenntnis: physikalische Rollen der Ereignisse als aktive Konditionen der Sinnobjekt-Ingression ausdruecken (p034). Uniform objects: lokalisierbar in JEDEM Moment einer duration (p042). p043: Quantenpostulat minimaler Zeitquanta als konsistent mit der Objektlehre moeglich.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.543,
+   "seed_y": 0.841
+  },
+  {
+   "id": "c8_conclude_reconstruct",
+   "term": "Summary chapter: conclude and reconstruct",
+   "type": "method",
+   "chapter": 8,
+   "definition_pid": "ch8-p002",
+   "key_support_pids": [
+    "ch8-p005"
+   ],
+   "summary": "Kap. VIII ist explizit Rekonstruktionskapitel: begin at the beginning, um Veraenderungen wissenschaftlicher Grundbegriffe einschaetzen zu koennen (p002). p005: Final-Erkenntnis - konkrete Naturfakten sind events mit Struktur in ihren mutual relations und eigenen Charakteren; Ziel der Wissenschaft: Ausdruck genau dieser Struktur und Charaktere.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.356,
+   "seed_y": 0.204
+  },
+  {
+   "id": "c8_cleopatra_criterion",
+   "term": "Cleopatra Criterion (recognition in everyday statement)",
+   "type": "principle",
+   "chapter": 8,
+   "definition_pid": "ch8-p006",
+   "key_support_pids": [
+    "ch8-p003",
+    "ch8-p004"
+   ],
+   "summary": "Drei Statements decodiert: (1) The sun rises - anteilhabender event-Charakter, (2) Cleopatra auf Embankment - recognition als relationales Faktum, (3) dunkle Linien im Sonnenspektrum - Gesetz der Natur als conditional character of exhibitions (p004). p006 verknuepft alltaegliche Sprecherpositionen mit der Formalstruktur.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.257,
+   "seed_y": 0.054
+  },
+  {
+   "id": "c8_critical_determinations",
+   "term": "Event-particles, Mars-perspective, coordinate systems",
+   "type": "method",
+   "chapter": 8,
+   "definition_pid": "ch8-p011",
+   "key_support_pids": [
+    "ch8-p012",
+    "ch8-p013"
+   ],
+   "summary": "Koordinaten als Measurement-System-Funktion (p011); Mars-Beispiel: ganz andere Q-Systeme determinieren denselben event-particle via andere Messsysteme (p012) - koordinatenrelative Beschreibung, nicht koordinatenfreie Natur. p013: Wahrgenommenes ist instantaneous space, nicht timeless space der Wissenschaft.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.942,
+   "seed_y": 0.118
+  },
+  {
+   "id": "c8_field_potential_model",
+   "term": "Field, impetus, potential and associate-potential",
+   "type": "method",
+   "chapter": 8,
+   "definition_pid": "ch8-p019",
+   "key_support_pids": [
+    "ch8-p020",
+    "ch8-p021",
+    "ch8-p014",
+    "ch8-p016"
+   ],
+   "summary": "Einstein-Dialog: Feld um event-particle E als zehn Quantitaeten J11..J44, symmetric tensor (p019); reduzierbar auf potential und associate-potential (p020); Bewegungsgesetze system-dependent interpretiert (p016); Michelson-Morley null result als Spiegel des system-relativen Binds von space-system und time-system (p014); Gravity-Link als Neuheit (p021).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.068,
+   "seed_y": 0.642
+  },
+  {
+   "id": "c8_ethos_of_softening",
+   "term": "Ethos: toned-down conformity with older physics",
+   "type": "thesis",
+   "chapter": 8,
+   "definition_pid": "ch8-p022",
+   "key_support_pids": [],
+   "summary": "Selbstbeschreibung am Kapitel-Ende: toned down the various exciting peculiarities, Reduktion auf conformity mit der aelteren Physik; explizite Ablehnung: physical phenomena are not due to oddities of space. Fuer Rezeptionsgeschichte wichtig: die radikalere Form der Theorie liegt unter der Textoberflaeche; Website-Module muessen dieses Ethos transparent spiegeln.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.442,
+   "seed_y": 0.153
+  },
+  {
+   "id": "c9_activity_passage",
+   "term": "Knowledge as experience of activity (passage)",
+   "type": "thesis",
+   "chapter": 9,
+   "definition_pid": "ch9-p002",
+   "key_support_pids": [
+    "ch9-p001"
+   ],
+   "summary": "Eroeffnung: Naturerkenntnis ist experience of activity (or passage); Dinge sind active entities, die events - chunks in the life of nature (p002). p001 als Band zurueck zu Kap. II: vicious bifurcation vermeiden, Natur ist deliverance of sense-awareness. Attitude: purely behaviouristic fuer die Formulierung physikalischer Konzepte.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.008,
+   "seed_y": 0.254
+  },
+  {
+   "id": "c9_significance",
+   "term": "Significance (opaque sphere as paradigm)",
+   "type": "entity",
+   "chapter": 9,
+   "definition_pid": "ch9-p005",
+   "key_support_pids": [
+    "ch9-p003",
+    "ch9-p027"
+   ],
+   "summary": "Significance: das Wissen um geometrische Charaktere NICHT wahrgenommener innerer Bereiche - die opake Sphaere hat einen Mittelpunkt, unabhaengig von Materie im Zentrum (p005). p003: Basis ist observational present plus percipient event. p027: Expansion gegenueber Principles of Natural Knowledge - cross-book-Edge zu spaeterem Whitehead-Werk.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.679,
+   "seed_y": 0.939
+  },
+  {
+   "id": "c9_stratification_percipient_event",
+   "term": "Stratification and percipient event (defense against bifurcation)",
+   "type": "principle",
+   "chapter": 9,
+   "definition_pid": "ch9-p006",
+   "key_support_pids": [
+    "ch9-p008",
+    "ch9-p012",
+    "ch9-p013"
+   ],
+   "summary": "Stratifikationen als reale Naturstruktur: Hesitation gegenueber realen Stratifikationen fuehrt Whitehead auf unbewussten bifurcation-Einfluss zurueck (p006). Percipient event = hier-und-jetzt in associated present duration mit absoluter Position in ihr (p008); instantaneous spaces als ideal zero-thickness durations (p012); Position aus Aggregate der Momente verschiedener Familien (p013).",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.085,
+   "seed_y": 0.621
+  },
+  {
+   "id": "c9_congruence_from_cogredience",
+   "term": "Order and congruence from cogredience",
+   "type": "principle",
+   "chapter": 9,
+   "definition_pid": "ch9-p016",
+   "key_support_pids": [
+    "ch9-p015",
+    "ch9-p022"
+   ],
+   "summary": "Ableitungskette verdichtet: Congruence depends on motion; from cogredience arises perpendicularity; aus Perpendicularity plus reciprocaler Symmetrie der Zeitsysteme folgt congruence both spatial and temporal (p016). p015: Motion/rest als beobachtete Fakten, relativ zum fundamentalen time-system. p022: Messung erweiterter Natur durch extended objects sinnvoll nur mit in Natur inherenter Simultaneitaet.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.883,
+   "seed_y": 0.738
+  },
+  {
+   "id": "c9_light_egalitarianism",
+   "term": "No peculiar status of light (multimodal knowing)",
+   "type": "thesis",
+   "chapter": 9,
+   "definition_pid": "ch9-p021",
+   "key_support_pids": [
+    "ch9-p019"
+   ],
+   "summary": "The theory accords no peculiar character to light beyond that accorded to other physical phenomena such as sound (p021): einige Objekte nur durch sight, andere nur durch sound, dritte weder noch (touch, smell) - gegen privilegierte optische Ontologie. p019: Spatio-temporale Messbarkeit aus extension, Stratifikation, rest/motion - keine Quelle haengt particuliert am Licht. Multimodalitaet als naturinformatisches Signaturelement.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.306,
+   "seed_y": 0.134
+  },
+  {
+   "id": "c9_einstein_dialog",
+   "term": "Differential equations and measure-system neutrality",
+   "type": "thesis",
+   "chapter": 9,
+   "definition_pid": "ch9-p023",
+   "key_support_pids": [
+    "ch9-p017"
+   ],
+   "summary": "Gesetze der Natur in differential equations formuliert, unabhaengig vom jeweiligen measure-system (p023) - kovariante Anforderung direkt aus Stratifikationsbereitschaft. p017: resultierende Formeln entsprechen der electromagnetic theory of relativity (restricted theory), mit vitalem Unterschied: die kritische Geschwindigkeit c ist abgeleitet, nicht postuliert.",
+   "editorial_status": "verified_definition",
+   "seed_x": 0.719,
+   "seed_y": 0.047
+  }
+ ],
+ "edges": [
+  {
+   "source": "c1_substratum_critique",
+   "target": "c1_fact_factors_entities",
+   "kind": "contrasts_with",
+   "cross_chapter": false
+  },
+  {
+   "source": "c2_bifurcation_thesis",
+   "target": "c1_nature_closed",
+   "kind": "contrasts_with",
+   "cross_chapter": true
+  },
+  {
+   "source": "c1_nature_closed",
+   "target": "c1_sense_awareness",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_homogeneous_thought",
+   "target": "c1_nature_closed",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_fact_factors_entities",
+   "target": "c1_sense_awareness",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_sense_awareness",
+   "target": "c2_fire_problem",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c1_event",
+   "target": "c1_fact_factors_entities",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_event",
+   "target": "c1_situation",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_nature_closed",
+   "target": "c2_bifurcation_thesis",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c1_sense_awareness",
+   "target": "c2_bifurcation_thesis",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c2_bifurcation_critique_rescue_attempts",
+   "target": "c2_bifurcation_thesis",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c2_apparent_causal_nature",
+   "target": "c2_bifurcation_thesis",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_substratum_critique",
+   "target": "c2_bifurcation_critique_rescue_attempts",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c2_bifurcation_thesis",
+   "target": "c2_psychological_addition",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c2_apparent_causal_nature",
+   "target": "c2_psychological_addition",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c2_bifurcation_thesis",
+   "target": "c2_fire_problem",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c2_fire_problem",
+   "target": "c2_psychological_addition",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_event",
+   "target": "c3_duration",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c3_duration",
+   "target": "c3_simultaneity",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c3_duration",
+   "target": "c3_passage_of_nature",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c3_moment",
+   "target": "c3_simultaneity",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c3_moment",
+   "target": "c3_passage_of_nature",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c3_abstractive_set",
+   "target": "c3_duration",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c3_abstractive_set",
+   "target": "c3_moment",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c3_abstractive_set",
+   "target": "c3_passage_of_nature",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_substratum_critique",
+   "target": "c3_materialistic_trinity_gap",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c3_materialistic_trinity_gap",
+   "target": "c3_passage_of_nature",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c3_abstractive_set",
+   "target": "c4_simple_location_rationale",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c4_pathos_of_abstraction",
+   "target": "c4_simple_location_rationale",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c4_abstractive_element",
+   "target": "c4_pathos_of_abstraction",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c3_abstractive_set",
+   "target": "c4_abstractive_set_extended",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c4_abstractive_set_extended",
+   "target": "c4_pathos_of_abstraction",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c4_abstractive_set_extended",
+   "target": "c4_covering_equality",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c4_abstractive_element",
+   "target": "c4_covering_equality",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c4_abstractive_element",
+   "target": "c4_event_particle",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c4_event_particle",
+   "target": "c4_simple_location_rationale",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c3_duration",
+   "target": "c5_percipient_event_cogredience",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c1_sense_awareness",
+   "target": "c5_percipient_event_cogredience",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c2_bifurcation_thesis",
+   "target": "c5_percipient_event_cogredience",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c5_here_station",
+   "target": "c5_percipient_event_cogredience",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c5_here_station",
+   "target": "c5_space_two_senses",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c5_motion_rest_frame",
+   "target": "c5_space_two_senses",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c5_here_station",
+   "target": "c5_motion_rest_frame",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c4_abstractive_element",
+   "target": "c5_vagrant_duratesolid",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c5_space_two_senses",
+   "target": "c5_vagrant_duratesolid",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c5_here_station",
+   "target": "c5_rectilinear_routes",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c5_rectilinear_routes",
+   "target": "c5_vagrant_duratesolid",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c5_motion_rest_frame",
+   "target": "c5_perpendicularity_time_systems",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c5_perpendicularity_time_systems",
+   "target": "c5_space_two_senses",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c4_pathos_of_abstraction",
+   "target": "c6_congruence_measurement_theory",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c5_motion_rest_frame",
+   "target": "c6_congruence_measurement_theory",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_congruence_measurement_theory",
+   "target": "c6_poincare_russell_recognition",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_sense_awareness",
+   "target": "c6_poincare_russell_recognition",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c5_space_two_senses",
+   "target": "c6_poincare_russell_recognition",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_congruence_measurement_theory",
+   "target": "c6_six_axioms",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c6_kinetic_symmetry",
+   "target": "c6_six_axioms",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c5_perpendicularity_time_systems",
+   "target": "c6_kinetic_symmetry",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c5_motion_rest_frame",
+   "target": "c6_kinetic_symmetry",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_new_theory_advantages",
+   "target": "c6_poincare_russell_recognition",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c6_congruence_measurement_theory",
+   "target": "c6_new_theory_advantages",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c2_bifurcation_thesis",
+   "target": "c6_new_theory_advantages",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_conventionalism_controversy",
+   "target": "c6_poincare_russell_recognition",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c6_congruence_measurement_theory",
+   "target": "c6_conventionalism_controversy",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_sense_awareness",
+   "target": "c7_objects_do_not_pass",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_poincare_russell_recognition",
+   "target": "c7_objects_do_not_pass",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c7_ingression",
+   "target": "c7_objects_do_not_pass",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_event",
+   "target": "c7_ingression",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c1_situation",
+   "target": "c7_ingression",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c7_ingression",
+   "target": "c7_object_types",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_situation",
+   "target": "c7_object_types",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c7_blue_ingression_classes",
+   "target": "c7_ingression",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c1_situation",
+   "target": "c7_blue_ingression_classes",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c5_percipient_event_cogredience",
+   "target": "c7_blue_ingression_classes",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c7_blue_ingression_classes",
+   "target": "c7_conditioning_active_passive",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c7_conditioning_active_passive",
+   "target": "c7_perceptual_objects",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c5_here_station",
+   "target": "c7_perceptual_objects",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c7_perceptual_objects",
+   "target": "c7_scientific_objects",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c7_ingression",
+   "target": "c7_scientific_objects",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c2_fire_problem",
+   "target": "c7_scientific_objects",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c1_fact_factors_entities",
+   "target": "c8_conclude_reconstruct",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c1_nature_closed",
+   "target": "c8_conclude_reconstruct",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c3_passage_of_nature",
+   "target": "c8_conclude_reconstruct",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c7_objects_do_not_pass",
+   "target": "c8_cleopatra_criterion",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_poincare_russell_recognition",
+   "target": "c8_cleopatra_criterion",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c4_event_particle",
+   "target": "c8_critical_determinations",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c5_space_two_senses",
+   "target": "c8_critical_determinations",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_new_theory_advantages",
+   "target": "c8_field_potential_model",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_kinetic_symmetry",
+   "target": "c8_field_potential_model",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_new_theory_advantages",
+   "target": "c8_ethos_of_softening",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c3_passage_of_nature",
+   "target": "c9_activity_passage",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c2_bifurcation_thesis",
+   "target": "c9_activity_passage",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c1_sense_awareness",
+   "target": "c9_activity_passage",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c5_percipient_event_cogredience",
+   "target": "c9_significance",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c7_ingression",
+   "target": "c9_significance",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c5_percipient_event_cogredience",
+   "target": "c9_stratification_percipient_event",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c3_duration",
+   "target": "c9_stratification_percipient_event",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c2_bifurcation_thesis",
+   "target": "c9_stratification_percipient_event",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_kinetic_symmetry",
+   "target": "c9_congruence_from_cogredience",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c5_perpendicularity_time_systems",
+   "target": "c9_congruence_from_cogredience",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c5_here_station",
+   "target": "c9_congruence_from_cogredience",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_new_theory_advantages",
+   "target": "c9_congruence_from_cogredience",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c9_activity_passage",
+   "target": "c9_light_egalitarianism",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c9_light_egalitarianism",
+   "target": "c9_significance",
+   "kind": "adjacent",
+   "cross_chapter": false
+  },
+  {
+   "source": "c8_field_potential_model",
+   "target": "c9_einstein_dialog",
+   "kind": "adjacent",
+   "cross_chapter": true
+  },
+  {
+   "source": "c6_kinetic_symmetry",
+   "target": "c9_einstein_dialog",
+   "kind": "adjacent",
+   "cross_chapter": true
+  }
+ ],
+ "edge_provenance": [
+  {
+   "rule": "contrast-field -> contrasts_with",
+   "source_record": "c1_substratum_critique",
+   "target_record": "c1_fact_factors_entities"
+  },
+  {
+   "rule": "contrast-field -> contrasts_with",
+   "source_record": "c2_bifurcation_thesis",
+   "target_record": "c1_nature_closed"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c1_nature_closed",
+   "target_record": "c1_sense_awareness"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c1_nature_closed",
+   "target_record": "c1_homogeneous_thought"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c1_sense_awareness",
+   "target_record": "c1_fact_factors_entities"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c1_sense_awareness",
+   "target_record": "c2_fire_problem"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c1_fact_factors_entities",
+   "target_record": "c1_event"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c1_event",
+   "target_record": "c1_situation"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c2_bifurcation_thesis",
+   "target_record": "c1_nature_closed"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c2_bifurcation_thesis",
+   "target_record": "c1_sense_awareness"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c2_bifurcation_thesis",
+   "target_record": "c2_bifurcation_critique_rescue_attempts"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c2_apparent_causal_nature",
+   "target_record": "c2_bifurcation_thesis"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c2_bifurcation_critique_rescue_attempts",
+   "target_record": "c1_substratum_critique"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c2_psychological_addition",
+   "target_record": "c2_bifurcation_thesis"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c2_psychological_addition",
+   "target_record": "c2_apparent_causal_nature"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c2_fire_problem",
+   "target_record": "c2_bifurcation_thesis"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c2_fire_problem",
+   "target_record": "c2_psychological_addition"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c3_duration",
+   "target_record": "c1_event"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c3_duration",
+   "target_record": "c3_simultaneity"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c3_duration",
+   "target_record": "c3_passage_of_nature"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c3_simultaneity",
+   "target_record": "c3_moment"
+  },
+  {
+   "rule": "related-field -> adjacent (redirected dangling ref)",
+   "source_record": "c3_passage_of_nature",
+   "raw_target": "c3_convergence_moments",
+   "applied_fix": "c3_moment"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c3_passage_of_nature",
+   "target_record": "c3_moment"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c3_abstractive_set",
+   "target_record": "c3_duration"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c3_abstractive_set",
+   "target_record": "c3_moment"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c3_abstractive_set",
+   "target_record": "c3_passage_of_nature"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c3_materialistic_trinity_gap",
+   "target_record": "c1_substratum_critique"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c3_materialistic_trinity_gap",
+   "target_record": "c3_passage_of_nature"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c4_simple_location_rationale",
+   "target_record": "c3_abstractive_set"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c4_simple_location_rationale",
+   "target_record": "c4_pathos_of_abstraction"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c4_pathos_of_abstraction",
+   "target_record": "c4_abstractive_element"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c4_abstractive_set_extended",
+   "target_record": "c3_abstractive_set"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c4_abstractive_set_extended",
+   "target_record": "c4_pathos_of_abstraction"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c4_covering_equality",
+   "target_record": "c4_abstractive_set_extended"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c4_covering_equality",
+   "target_record": "c4_abstractive_element"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c4_abstractive_element",
+   "target_record": "c4_event_particle"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c4_event_particle",
+   "target_record": "c4_simple_location_rationale"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_percipient_event_cogredience",
+   "target_record": "c3_duration"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_percipient_event_cogredience",
+   "target_record": "c1_sense_awareness"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_percipient_event_cogredience",
+   "target_record": "c2_bifurcation_thesis"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_percipient_event_cogredience",
+   "target_record": "c5_here_station"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_here_station",
+   "target_record": "c5_space_two_senses"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_space_two_senses",
+   "target_record": "c5_motion_rest_frame"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_motion_rest_frame",
+   "target_record": "c5_here_station"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_vagrant_duratesolid",
+   "target_record": "c4_abstractive_element"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_vagrant_duratesolid",
+   "target_record": "c5_space_two_senses"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_rectilinear_routes",
+   "target_record": "c5_here_station"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_rectilinear_routes",
+   "target_record": "c5_vagrant_duratesolid"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_perpendicularity_time_systems",
+   "target_record": "c5_motion_rest_frame"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c5_perpendicularity_time_systems",
+   "target_record": "c5_space_two_senses"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_congruence_measurement_theory",
+   "target_record": "c4_pathos_of_abstraction"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_congruence_measurement_theory",
+   "target_record": "c5_motion_rest_frame"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_poincare_russell_recognition",
+   "target_record": "c6_congruence_measurement_theory"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_poincare_russell_recognition",
+   "target_record": "c1_sense_awareness"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_poincare_russell_recognition",
+   "target_record": "c5_space_two_senses"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_six_axioms",
+   "target_record": "c6_congruence_measurement_theory"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_six_axioms",
+   "target_record": "c6_kinetic_symmetry"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_kinetic_symmetry",
+   "target_record": "c5_perpendicularity_time_systems"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_kinetic_symmetry",
+   "target_record": "c5_motion_rest_frame"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_new_theory_advantages",
+   "target_record": "c6_poincare_russell_recognition"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_new_theory_advantages",
+   "target_record": "c6_congruence_measurement_theory"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_new_theory_advantages",
+   "target_record": "c2_bifurcation_thesis"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_conventionalism_controversy",
+   "target_record": "c6_poincare_russell_recognition"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c6_conventionalism_controversy",
+   "target_record": "c6_congruence_measurement_theory"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_objects_do_not_pass",
+   "target_record": "c1_sense_awareness"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_objects_do_not_pass",
+   "target_record": "c6_poincare_russell_recognition"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_objects_do_not_pass",
+   "target_record": "c7_ingression"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_ingression",
+   "target_record": "c1_event"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_ingression",
+   "target_record": "c1_situation"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_object_types",
+   "target_record": "c7_ingression"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_object_types",
+   "target_record": "c1_situation"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_blue_ingression_classes",
+   "target_record": "c7_ingression"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_blue_ingression_classes",
+   "target_record": "c1_situation"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_blue_ingression_classes",
+   "target_record": "c5_percipient_event_cogredience"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_conditioning_active_passive",
+   "target_record": "c7_blue_ingression_classes"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_conditioning_active_passive",
+   "target_record": "c7_perceptual_objects"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_perceptual_objects",
+   "target_record": "c5_here_station"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_scientific_objects",
+   "target_record": "c7_perceptual_objects"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_scientific_objects",
+   "target_record": "c7_ingression"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c7_scientific_objects",
+   "target_record": "c2_fire_problem"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c8_conclude_reconstruct",
+   "target_record": "c1_fact_factors_entities"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c8_conclude_reconstruct",
+   "target_record": "c1_nature_closed"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c8_conclude_reconstruct",
+   "target_record": "c3_passage_of_nature"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c8_cleopatra_criterion",
+   "target_record": "c7_objects_do_not_pass"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c8_cleopatra_criterion",
+   "target_record": "c6_poincare_russell_recognition"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c8_critical_determinations",
+   "target_record": "c4_event_particle"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c8_critical_determinations",
+   "target_record": "c5_space_two_senses"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c8_field_potential_model",
+   "target_record": "c6_new_theory_advantages"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c8_field_potential_model",
+   "target_record": "c6_kinetic_symmetry"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c8_ethos_of_softening",
+   "target_record": "c6_new_theory_advantages"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_activity_passage",
+   "target_record": "c3_passage_of_nature"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_activity_passage",
+   "target_record": "c2_bifurcation_thesis"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_activity_passage",
+   "target_record": "c1_sense_awareness"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_significance",
+   "target_record": "c5_percipient_event_cogredience"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_significance",
+   "target_record": "c7_ingression"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_stratification_percipient_event",
+   "target_record": "c5_percipient_event_cogredience"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_stratification_percipient_event",
+   "target_record": "c3_duration"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_stratification_percipient_event",
+   "target_record": "c2_bifurcation_thesis"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_congruence_from_cogredience",
+   "target_record": "c6_kinetic_symmetry"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_congruence_from_cogredience",
+   "target_record": "c5_perpendicularity_time_systems"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_congruence_from_cogredience",
+   "target_record": "c5_here_station"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_congruence_from_cogredience",
+   "target_record": "c6_new_theory_advantages"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_light_egalitarianism",
+   "target_record": "c9_activity_passage"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_light_egalitarianism",
+   "target_record": "c9_significance"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_einstein_dialog",
+   "target_record": "c8_field_potential_model"
+  },
+  {
+   "rule": "related-field -> adjacent",
+   "source_record": "c9_einstein_dialog",
+   "target_record": "c6_kinetic_symmetry"
+  }
+ ]
+}
