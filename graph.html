@@ -12,11 +12,12 @@ body{font-family:Georgia,serif;background:var(--paper);color:var(--ink)}
 a.back{font-family:sans-serif;font-size:.85rem;color:var(--accent);text-decoration:none}
 h1{font-weight:normal;margin:.4rem 0 .1rem}
 .sub{font-style:italic;color:#666;font-size:.9rem;margin-bottom:1rem}
-#stage{position:relative;background:#fff;border:1px solid var(--soft);height:640px;border-radius:4px;overflow:hidden}
+#stage{position:relative;background:#fff;border:1px solid var(--soft);height:660px;border-radius:4px;overflow:hidden}
 svg{display:block}
 .legend{display:flex;flex-wrap:wrap;gap:1rem;margin:.8rem 0;font-family:sans-serif;font-size:.78rem;color:#555}
 .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px}
-#panel{position:absolute;top:10px;right:10px;width:290px;max-height:600px;overflow:auto;background:var(--paper);border:1px solid var(--soft);border-radius:6px;padding:.9rem 1rem;font-size:.85rem;display:none;box-shadow:0 4px 14px rgba(27,36,48,.15)}
+.bandlab{font-family:sans-serif;font-size:11px;fill:#999}
+#panel{position:absolute;top:10px;right:10px;width:290px;max-height:640px;overflow:auto;background:var(--paper);border:1px solid var(--soft);border-radius:6px;padding:.9rem 1rem;font-size:.85rem;display:none;box-shadow:0 4px 14px rgba(27,36,48,.15)}
 #panel h3{font-family:sans-serif;font-size:.95rem;margin:.3rem 0}
 #panel small{font-family:sans-serif;color:#777}
 #panel .pids{font-family:sans-serif;font-size:.72rem;margin-top:.4rem}
@@ -35,7 +36,7 @@ footer a{color:var(--accent)}
 <div class="wrap">
 <a class="back" href="index.html">&larr; Home</a>
 <h1>Concept Graph</h1>
-<div class="sub">58 concept records &middot; 55 visible nodes &middot; every edge documented in concept_graph_v1.0.json</div>
+<div class="sub">58 concept records &middot; 55 nodes &middot; edges with rule provenance &middot; drag nodes &mdash; layout settles into chapter bands</div>
 <div class="legend">
 <span><span class="dot" style="background:#6d4aff"></span>thesis</span>
 <span><span class="dot" style="background:#2e7d32"></span>method</span>
@@ -53,77 +54,106 @@ footer a{color:var(--accent)}
 <h3 id="modalpid" style="font-family:sans-serif"></h3>
 <div id="modaltext" style="margin-top:1rem"></div>
 </div></div>
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="vendor/d3.min.js"></script>
 <script>
 const TYPE_COLOR={thesis:'#6d4aff',method:'#2e7d32',entity:'#b8860b',relation:'#c0392b',principle:'#1b2430'};
 Promise.all([
  fetch('data/concept_graph_v1.0.json').then(r=>r.json()),
  fetch('data/corpus.json').then(r=>r.json())
 ]).then(([G,CORPUS])=>{
-const W=1140,H=640;
+const W=1140,H=660;
 const stageEl=document.getElementById('stage');
 const stageW=stageEl.clientWidth||W;
 const scale=Math.min(1,stageW/W);
 const svg=d3.select('#stage').insert('svg',':first-child')
  .attr('width','100%').attr('viewBox','0 0 '+W+' '+H)
  .attr('height',H*scale);
-G.nodes.forEach(n=>{n.x=n.seed_x*W;n.y=40+n.seed_y*(H-80);});
+
+// chapter bands (hybrid layout)
+const bandY0=30,bandH=(H-60)/9;
+for(let c=1;c<=9;c++){
+ svg.append('rect').attr('x',8).attr('y',bandY0+(c-1)*bandH)
+  .attr('width',W-16).attr('height',bandH-4)
+  .attr('fill',c%2?'#faf8f3':'#f3efe6')
+  .attr('rx',6);
+ svg.append('text').attr('class','bandlab').attr('x',16).attr('y',bandY0+(c-1)*bandH+16)
+  .text('CHAPTER '+['I','II','III','IV','V','VI','VII','VIII','IX'][c-1]);
+}
+
+G.nodes.forEach(n=>{
+ n.x=n.seed_x*W; n.y=bandY0+(n.chapter-1)*bandH+n.seed_y*(bandH-20);
+});
 const sim=d3.forceSimulation(G.nodes)
- .force('link',d3.forceLink(G.edges).id(d=>d.id)
-   .distance(l=>l.kind==='contrasts_with'?210:90).strength(.4))
- .force('charge',d3.forceManyBody().strength(-270))
- .force('collide',d3.forceCollide().radius(26))
- .force('center',d3.forceCenter(W/2,H/2))
- .force('x',d3.forceX(n=>60+(n.chapter-1)*(W-120)/8).strength(.05))
- .stop();
-for(let i=0;i<320;i++)sim.tick();
-svg.append('defs').append('marker').attr('id','arrow')
- .attr('viewBox','0 -5 10 10').attr('refX',18).attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto')
- .append('path').attr('d','M0,-5L10,0L0,5').attr('fill','#c0392b');
+ .force('link',d3.forceLink(G.edges).id(d=>d.id).distance(95).strength(.35))
+ .force('charge',d3.forceManyBody().strength(-230))
+ .force('collide',d3.forceCollide().radius(24))
+ .force('y',d3.forceY(n=>bandY0+(n.chapter-1)*bandH+bandH/2).strength(.85))
+ .force('x',d3.forceX(W/2).strength(.045))
+ .on('tick',ticked);
+sim.alphaTarget=0; sim.alphaDecay=0.0228;
+
 const link=svg.append('g').selectAll('line').data(G.edges).join('line')
  .attr('stroke',l=>l.kind==='contrasts_with'?'#c0392b':'#c2bcae')
  .attr('stroke-width',l=>l.kind==='contrasts_with'?2:1)
  .attr('stroke-dasharray',l=>l.kind==='contrasts_with'?'6,4':null)
- .attr('marker-end',l=>l.kind==='contrasts_with'?'url(#arrow)':'')
- .attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
- .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+ .attr('marker-end',l=>l.kind==='contrasts_with'?'url(#arrow)':'');
+svg.append('defs').append('marker').attr('id','arrow')
+ .attr('viewBox','0 -5 10 10').attr('refX',18).attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto')
+ .append('path').attr('d','M0,-5L10,0L0,5').attr('fill','#c0392b');
+
 const node=svg.append('g').selectAll('circle').data(G.nodes).join('circle')
- .attr('cx',d=>d.x).attr('cy',d=>d.y)
  .attr('r',d=>d.variant_cluster?16:11)
  .attr('fill',d=>d.variant_cluster?'#fff':TYPE_COLOR[d.type])
  .attr('stroke',d=>d.variant_cluster?'#6d4aff':(TYPE_COLOR[d.type]||'#999'))
  .attr('stroke-width',d=>d.variant_cluster?2.5:1)
  .attr('stroke-dasharray',d=>d.variant_cluster?'5,4':null)
- .style('cursor','pointer')
- .on('click',(e,d)=>showPanel(d));
+ .style('cursor','grab')
+ .call(d3.drag()
+   .on('start',(e,d)=>{if(!e.active)sim.alphaTarget(.3);d.fx=d.x;d.fy=d.y;})
+   .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y;})
+   .on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}))
+ .on('click',showPanel);
+
 const label=svg.append('g').selectAll('text').data(G.nodes).join('text')
- .attr('x',d=>d.x+14).attr('y',d=>d.y-12)
  .attr('font-family','sans-serif').attr('font-size',d=>d.variant_cluster?'11px':'9.5px')
  .attr('font-weight',d=>d.variant_cluster?'bold':'normal')
  .attr('fill','#1b2430')
  .text(d=>d.term.length>26?d.term.slice(0,24)+'\u2026':d.term)
  .style('cursor','pointer')
- .on('click',(e,d)=>showPanel(d));
+ .call(d3.drag()
+   .on('start',(e,d)=>{if(!e.active)sim.alphaTarget(.3);d.fx=d.x;d.fy=d.y;})
+   .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y;})
+   .on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}))
+ .on('click',showPanel);
+
+function ticked(){
+ link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+     .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+ node.attr('cx',d=>d.x).attr('cy',d=>d.y);
+ label.attr('x',d=>d.x+14).attr('y',d=>d.y-12);
+}
+
 const panel=document.getElementById('panel');
 window.panel=panel;
-function showPanel(n){
+function showPanel(e,d){
  let html='<span style="float:right;cursor:pointer;font-family:sans-serif" onclick="panel.style.display=\'none\'">&#10005;</span>';
- html+='<h3>'+n.term+'</h3>';
- html+='<small>'+n.id+' &middot; '+n.type+' &middot; Chapter '+n.chapter+'</small>';
- if(n.summary)html+='<p style="margin:.5rem 0">'+n.summary+'</p>';
- if(n.variant_cluster){
-  html+='<div class="cluster-head">Variant cluster &mdash; '+n.variant_cluster.members.length+' voices inside</div>';
-  n.variant_cluster.members.forEach((m,i)=>{
-   html+='<div class="member"><b>'+n.variant_cluster.member_terms[i]+'</b><br><small>'+m+'</small></div>';
+ html+='<h3>'+d.term+'</h3>';
+ html+='<small>'+d.id+' &middot; '+d.type+' &middot; Chapter '+d.chapter+'</small>';
+ if(d.summary)html+='<p style="margin:.5rem 0">'+d.summary+'</p>';
+ if(d.variant_cluster){
+  html+='<div class="cluster-head">Variant cluster &mdash; '+d.variant_cluster.members.length+' voices inside</div>';
+  d.variant_cluster.members.forEach((m,i)=>{
+   html+='<div class="member"><b>'+d.variant_cluster.member_terms[i]+'</b><br><small>'+m+'</small></div>';
   });
  }
  let pids=[];
- if(n.definition_pid)pids.push(n.definition_pid);
- if(n.key_support_pids)pids=pids.concat(n.key_support_pids.slice(0,4));
+ if(d.definition_pid)pids.push(d.definition_pid);
+ if(d.key_support_pids)pids=pids.concat(d.key_support_pids.slice(0,4));
  if(pids.length)html+='<div class="pids">'+pids.map(p=>'<span class="pid" data-pid="'+p+'">'+p+'</span>').join(' ')+'</div>';
  panel.innerHTML=html;
  panel.style.display='block';
 }
+
 document.addEventListener('click',e=>{
  const t=e.target;
  if(!t.classList||!t.classList.contains('pid'))return;
