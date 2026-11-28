@@ -2616,7 +2616,7 @@
       "title": "The Ultimate Physical Concepts",
       "page_orig": 185,
       "in_lecture_series": false,
-      "paragraph_count": 29,
+      "paragraph_count": 23,
       "paragraphs": [
         {
           "pid": "ch9-p001",
@@ -2756,36 +2756,65 @@
           "orig_pages": [
             "197"
           ]
-        },
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "id": "note1",
+      "num": "1",
+      "title": "NOTE: ON THE GREEK CONCEPT OF A POINT",
+      "former_ch9_pids": [
+        "ch9-p024",
+        "ch9-p025",
+        "ch9-p026"
+      ],
+      "in_lecture_series": false,
+      "paragraph_count": 3,
+      "paragraphs": [
         {
-          "pid": "ch9-p024",
+          "pid": "note1-p001",
           "text": "The preceding pages had been passed for press before I had the pleasure of seeing Sir T. L. Heath’s Euclid in Greek[14]. In the original Euclid’s first definition is",
           "orig_pages": []
         },
         {
-          "pid": "ch9-p025",
+          "pid": "note1-p002",
           "text": "σημειον εστιν, ου μερος ουθεν.",
           "orig_pages": []
         },
         {
-          "pid": "ch9-p026",
+          "pid": "note1-p003",
           "text": "I have quoted it on p. 86 in the expanded form taught to me in childhood, ‘without parts and without magnitude.’ I should have consulted Heath’s English edition—a classic from the moment of its issue—before committing myself to a statement about Euclid. This is however a trivial correction not affecting sense and not worth a note. I wish here to draw attention to Heath’s own note to this definition in his Euclid in Greek. He summarises Greek thought on the nature of a point, from the Pythagoreans, through Plato and Aristotle, to Euclid. My analysis of the requisite character of a point on pp. 89 and 90 is in complete agreement with the outcome of the Greek discussion.",
           "orig_pages": []
-        },
+        }
+      ]
+    },
+    {
+      "id": "note2",
+      "num": "2",
+      "title": "NOTE: ON SIGNIFICANCE AND INFINITE EVENTS",
+      "former_ch9_pids": [
+        "ch9-p027",
+        "ch9-p028"
+      ],
+      "in_lecture_series": false,
+      "paragraph_count": 3,
+      "paragraphs": [
         {
-          "pid": "ch9-p027",
+          "pid": "note2-p001",
           "text": "The theory of significance has been expanded and made more definite in the present volume. It had already been introduced in the Principles of Natural Knowledge (cf. subarticles 3.3 to 3.8 and 16.1, 16.2, 19.4, and articles 20, 21). In reading over the proofs of the present volume, I come to the conclusion that in the light of this development my limitation of infinite events to durations is untenable. This limitation is stated in article 33 of the Principles and at the beginning of Chapter IV (p. 74) of this book. There is not only a significance of the discerned events embracing the whole present duration, but there is a significance of a cogredient event involving its extension through a whole time-system backwards and forwards. In other words the essential ‘beyond’ in nature is a definite beyond in time as well as in space [cf. pp. 53, 194]. This follows from my whole thesis as to the assimilation of time and space and their origin in extension. It also has the same basis in the analysis of the character of our knowledge of nature. It follows from this admission that it is possible to define point-tracks [i.e. the points of timeless spaces] as abstractive elements. This is a great improvement as restoring the balance between moments and points. I still hold however to the statement in subarticle 35.4 of the Principles that the intersection of a pair of non-parallel durations does not present itself to us as one event. This correction does not affect any of the subsequent reasoning in the two books.",
           "orig_pages": [
             "198"
           ]
         },
         {
-          "pid": "ch9-p028",
+          "pid": "note2-p002",
           "text": "I may take this opportunity of pointing out that the ‘stationary events’ of article 57 of the Principles are merely cogredient events got at from an abstract mathematical point of view.",
           "orig_pages": []
         },
         {
-          "pid": "ch9-p029",
+          "pid": "note2-p003",
           "text": "In the case of terms of frequent occurrence, only those occurrences are indexed which are of peculiar importance for the elucidation of meaning.",
           "orig_pages": []
         }
@@ -2794,6 +2823,6 @@
   ],
   "parser_meta": {
     "parsed_with": "parse_whitehead_concept_of_nature.py v1.2",
-    "expected_paragraph_total": 464
+    "expected_paragraph_total": 458
   }
 }

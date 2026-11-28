@@ -47,6 +47,10 @@ def text_of(elem):
             parts.append(text_of(child))
     return "".join(parts)
 
+def is_note_heading(h):
+    t = h.get_text().strip()
+    return t.upper().startswith("NOTE:")
+
 def is_chapter_heading(h):
     txt = clean_text(h.get_text()).upper()
     return bool(re.match(r"^CHAPTER\s+[IVX]+", txt))
@@ -85,7 +89,8 @@ def main(output_path="corpus.json"):
         node = h.find_next()
         while node is not None and not (
             getattr(node, "name", None) in ("h1", "h2", "h3")
-            and is_chapter_heading(node)
+            and (is_chapter_heading(node) or is_note_heading(node)
+                 or "INDEX" in node.get_text().upper())
         ):
             if getattr(node, "name", None) == "p":
                 txt = clean_text(text_of(node))
@@ -110,6 +115,42 @@ def main(output_path="corpus.json"):
         })
         print(f"[+] Kapitel {roman}: {title} ({len(para_records)} Absaetze)")
 
+    # v1.2: Notes als eigene Abschnitte (pid: note{n}-p{XXX})
+    notes_out = []
+    for nh in soup.find_all(["h1", "h2", "h3"]):
+        if not is_note_heading(nh):
+            continue
+        title = clean_text(nh.get_text())
+        paragraphs = []
+        node = nh.find_next()
+        while node is not None and not (
+            getattr(node, "name", None) in ("h1", "h2", "h3")
+            and (is_chapter_heading(node) or is_note_heading(node))
+        ):
+            if getattr(node, "name", None) == "p":
+                txt = clean_text(text_of(node))
+                if txt and not txt.startswith("[") and len(txt) > 20:
+                    pages = extract_orig_pages(node)
+                    paragraphs.append({"text": txt, "orig_pages": pages})
+            node = node.find_next()
+        n_idx = len(notes_out) + 1
+        para_records = [
+            {"pid": f"note{n_idx}-p{i:03d}", "text": rec["text"],
+             "orig_pages": rec["orig_pages"]}
+            for i, rec in enumerate(paragraphs, start=1)
+        ]
+        notes_out.append({
+            "id": f"note{n_idx}",
+            "num": str(n_idx),
+            "title": title,
+            "former_ch9_pids": {1: ["ch9-p024", "ch9-p025", "ch9-p026"],
+                                 2: ["ch9-p027", "ch9-p028"]}.get(n_idx, []),
+            "in_lecture_series": False,
+            "paragraph_count": len(para_records),
+            "paragraphs": para_records,
+        })
+        print(f"[+] Note {n_idx}: {title} ({len(para_records)} Absaetze)")
+
     corpus = {
         "work": {
             "id": WORK_ID,
@@ -126,6 +167,7 @@ def main(output_path="corpus.json"):
             ],
         },
         "chapters": chapters_out,
+        "notes": notes_out,
         "parser_meta": {
             "parsed_with": "parse_whitehead_concept_of_nature.py v1.2",
             "expected_paragraph_total": sum(c["paragraph_count"] for c in chapters_out),

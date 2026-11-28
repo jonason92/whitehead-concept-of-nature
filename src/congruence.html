@@ -106,7 +106,7 @@ fetch('../data/corpus.json').then(r=>r.json()).then(d=>CORPUS=d);
 document.addEventListener('click',e=>{
 if(!e.target.classList.contains('pid'))return;
 const pid=e.target.dataset.pid;if(!CORPUS)return;
-for(const ch of CORPUS.chapters){const p=ch.paragraphs.find(x=>x.pid===pid);
+for(const ch of (CORPUS.chapters||[]).concat(CORPUS.notes||[])){const p=ch.paragraphs.find(x=>x.pid===pid);
 if(p){document.getElementById('modalpid').textContent=pid+' — '+ch.title;
 document.getElementById('modaltext').textContent=p.text;modal.style.display='flex';return;}}});
 document.getElementById('mclose').onclick=()=>modal.style.display='none';

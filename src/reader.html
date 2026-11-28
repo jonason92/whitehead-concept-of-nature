@@ -40,19 +40,19 @@ async function init(){
 try{const r=await fetch('../data/corpus.json');CORPUS=await r.json();}
 catch(e){document.getElementById('content').innerHTML='<div class="err">Corpus could not be loaded ('+e.message+'). Serve via http from the repo root, e.g. <code>python3 -m http.server 8000</code> and open /src/reader.html</div>';return;}
 const toc=document.getElementById('toc');
-CORPUS.chapters.forEach((ch,i)=>{
+(CORPUS.chapters||[]).concat(CORPUS.notes||[]).forEach((ch,i)=>{
 const b=document.createElement('button');b.className='tbtn';
 b.textContent=ch.title.replace(/^Chapter [IVX]+\.\s*/i,'').slice(0,26)||('Ch '+(i+1));
 b.title=ch.title;
 b.onclick=()=>showChapter(i);
 b.id='tocbtn'+i;toc.appendChild(b);});
 const want=location.hash.match(/^(ch\d+-p\d+)$/);
-showChapter(want?CORPUS.chapters.findIndex(c=>c.paragraphs.some(p=>p.pid===want[1])):0,true);
+showChapter(want?(CORPUS.chapters||[]).concat(CORPUS.notes||[]).findIndex(c=>c.paragraphs.some(p=>p.pid===want[1])):0,true);
 }
 function showChapter(i,followHash){
 document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));
 const btn=document.getElementById('tocbtn'+i);if(btn)btn.classList.add('on');
-const ch=CORPUS.chapters[i];
+const ch=(CORPUS.chapters||[]).concat(CORPUS.notes||[])[i];
 const el=document.getElementById('content');
 el.innerHTML='<div class="chaptitle">'+ch.title+'</div>'+
 ch.paragraphs.map(p=>'<p class="para" id="'+p.pid+'"><span class="pidchip">'+p.pid+'</span>'+(p.orig_pages&&p.orig_pages.length?'<span class="pidchip">p. '+p.orig_pages.join(', ')+'</span>':'')+p.text.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</p>').join('\n');
