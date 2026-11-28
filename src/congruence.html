@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Congruence — The Concept of Nature</title>
+<style>
+:root{--paper:#faf8f3;--ink:#1b2430;--accent:#6d4aff;--soft:#e8e3d8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;background:var(--paper);color:var(--ink);line-height:1.6}
+.wrap{max-width:920px;margin:0 auto;padding:2rem 1.5rem}
+a.back{font-family:sans-serif;font-size:.85rem;color:var(--accent);text-decoration:none}
+h1{font-weight:normal;margin:.5rem 0 .2rem}
+.claimbox{background:#fff;border-left:4px solid var(--accent);padding:1rem 1.2rem;margin:1.2rem 0;font-style:italic}
+.pid{font-family:sans-serif;font-size:.75rem;background:var(--soft);padding:.1rem .4rem;border-radius:3px;cursor:pointer}
+.pid:hover{background:var(--accent);color:#fff}
+.rulerstage{background:#fff;border:1px solid var(--soft);height:200px;position:relative;overflow:hidden;margin:1rem 0;display:flex;align-items:center;justify-content:space-around}
+.seg{height:56px;background:rgba(109,74,255,.15);border:2px solid var(--accent);transition:all .5s}
+.axioms{display:flex;flex-wrap:wrap;gap:.8rem;margin:1rem 0}
+.acard{border:1px solid var(--soft);background:#fff;padding:.8rem 1rem;font-family:sans-serif;font-size:.8rem;flex:1;min-width:200px}
+.acard b{display:block;color:var(--accent);margin-bottom:.3rem}
+.controls{display:flex;flex-wrap:wrap;gap:1.5rem;margin:1rem 0;font-family:sans-serif;font-size:.85rem}
+.controls label{display:block;color:#777;margin-bottom:.2rem}
+input[type=range]{width:260px}
+.toggles{margin:1rem 0;font-family:sans-serif;font-size:.85rem}
+.tbtn{border:1px solid var(--ink);background:none;padding:.3rem .8rem;cursor:pointer;margin-right:.5rem}
+.tbtn.on{background:var(--ink);color:var(--paper)}
+.note{border:1px solid var(--soft);background:#fff;padding:1rem 1.2rem;margin:1rem 0;font-size:.95rem}
+.modal{display:none;position:fixed;inset:0;background:rgba(27,36,48,.6);align-items:center;justify-content:center}
+.modal .box{background:var(--paper);max-width:640px;max-height:80vh;overflow:auto;padding:2rem;border-radius:6px}
+.modal .close{float:right;cursor:pointer;font-family:sans-serif}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--soft);font-size:.8rem;color:#777;font-family:sans-serif}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html">&larr; Home</a>
+<h1 data-i18n="title"></h1>
+<div class="claimbox"><span data-i18n="claim"></span>
+<br><small><span class="pid" data-pid="ch6-p006">ch6-p006</span></small></div>
+<div class="rulerstage" id="stage">
+<div class="seg" id="segA"></div>
+<div class="seg" id="segB"></div>
+</div>
+<div class="controls">
+<div><label data-i18n="ml"></label><input type="range" id="move" min="0" max="100" value="0"></div>
+</div>
+<div class="toggles">
+<button class="tbtn on" id="t-russell" data-i18n="brus"></button>
+<button class="tbtn" id="t-poincare" data-i18n="bpoi"></button>
+</div>
+<div class="axioms" id="ax-russell">
+<div class="acard"><b data-i18n="a1t"></b><span data-i18n="a1x"></span><br><small><span class="pid" data-pid="ch6-p010">ch6-p010</span></small></div>
+<div class="acard"><b data-i18n="a2t"></b><span data-i18n="a2x"></span><br><small><span class="pid" data-pid="ch6-p014">ch6-p014</span></small></div>
+<div class="acard"><b data-i18n="a3t"></b><span data-i18n="a3x"></span><br><small><span class="pid" data-pid="ch6-p018">ch6-p018</span></small></div>
+</div>
+<div class="note" id="note-poi" style="display:none">
+<b data-i18n="pnt"></b><p data-i18n="pnx"></p>
+<small><span class="pid" data-pid="ch6-p002">ch6-p002</span> · <span class="pid" data-pid="ch6-p048">ch6-p048</span></small>
+</div>
+<footer>The Concept of Nature · Module IV · <a href="https://github.com/jonason92/whitehead-concept-of-nature">GitHub repo</a></footer>
+</div>
+<div class="modal" id="modal"><div class="box">
+<span class="close" id="mclose">&#10005;</span>
+<h3 id="modalpid" style="font-family:sans-serif"></h3>
+<div id="modaltext" style="margin-top:1rem"></div>
+</div></div>
+<script>
+const I18N={
+en:{title:"Congruence — When is a Yardstick a Yardstick?",
+claim:"Congruence presupposes uniformity: equal quantitative measures within a whole mark a unique system of external relations. Russell grounds it in axioms; Poincare answers with conventionalism — the geometry of the physical continuum is chosen, not found.",
+ml:"lay segment A alongside B (transport)",
+brus:"Russell view (axiomatic)",bpoi:"Poincare view (conventionalist)",
+a1t:"Axiom of homogeneity",a1x:"Space admits a uniform treatment throughout: no privileged places distort measurement.",
+a2t:"Axiom of position",a2x:"Spatial relations depend on relative position within the whole, fixed by extensive relations.",
+a3t:"Axiom of distances",a3x:"Congruent segments sustain equal quantitative expressions wherever transported within the same system.",
+pnt:"The conventionalist counterpoint",
+pnx:"For Poincare the metric is not dictated by nature: a different convention of congruence would yield a different, equally serviceable physics. Whitehead rejects pure convention — uniformity is a fact about the extensive continuum — yet keeps Poincare's warning as a standing challenge."},
+de:{title:"Kongruenz — Wann ist ein Massstab ein Massstab?",
+claim:"Kongruenz setzt Homogenitaet voraus: gleiche quantitative Masse innerhalb eines Ganzen kennzeichnen ein einzigartiges System externer Relationen. Russell begruendet sie axiomatisch; Poincare antwortet konventionalistisch — die Geometrie des physikalischen Kontinuums wird gewaehlt, nicht gefunden.",
+ml:"Segment A an B heranlegen (Transport)",
+brus:"Russell-Ansicht (axiomatisch)",bpoi:"Poincare-Ansicht (konventionalistisch)",
+a1t:"Axiom der Homogenitaet",a1x:"Der Raum gestattet ueberall eine gleichfoermige Behandlung: keine privilegierten Orte verzerren das Messen.",
+a2t:"Positionsaxiom",a2x:"Raeumliche Relationen haengen von der relativen Lage im Ganzen ab, festgelegt durch extensive Relationen.",
+a3t:"Abstandsaxiom",a3x:"Kongruente Segmente bewahren gleiche quantitative Ausdruecke, wohin auch immer sie im selben System transportiert werden.",
+pnt:"Der konventionalistische Kontrapunkt",
+pnx:"Fuer Poincare ist die Metrik nicht von der Natur vorgeschrieben: eine andere Kongruenz-Konvention ergaebe eine ebenfalls brauchbare Physik. Whitehead lehnt reinen Konventionalismus ab — Homogenitaet ist eine Tatsache des extensiven Kontinuums —, behaelt Poincares Warnung aber als stehende Herausforderung."}};
+function setLang(l){document.documentElement.lang=l;
+document.querySelectorAll('[data-i18n]').forEach(el=>{if(I18N[l][el.dataset.i18n])el.textContent=I18N[l][el.dataset.i18n]});
+localStorage.setItem('wcn-lang',l);}
+setLang(localStorage.getItem('wcn-lang')||'en');
+const segA=document.getElementById('segA'),segB=document.getElementById('segB');
+const move=document.getElementById('move');
+function render(){
+const t=move.value/100;
+segA.style.width=(140-t*60)+'px';
+segA.style.transform='translateX('+(t*40)+'px) rotate('+(t*8)+'deg)';
+segB.style.width=(140-t*60)+'px';
+}
+move.oninput=render;
+document.getElementById('t-poincare').onclick=()=>{const n=document.getElementById('note-poi');const a=document.getElementById('ax-russell');const b=document.getElementById('t-poincare');const on=n.style.display!=='block';n.style.display=on?'block':'none';a.style.opacity=on?'.35':'1';b.classList.toggle('on',on);};
+render();
+const modal=document.getElementById('modal');let CORPUS=null;
+fetch('../data/corpus.json').then(r=>r.json()).then(d=>CORPUS=d);
+document.addEventListener('click',e=>{
+if(!e.target.classList.contains('pid'))return;
+const pid=e.target.dataset.pid;if(!CORPUS)return;
+for(const ch of CORPUS.chapters){const p=ch.paragraphs.find(x=>x.pid===pid);
+if(p){document.getElementById('modalpid').textContent=pid+' — '+ch.title;
+document.getElementById('modaltext').textContent=p.text;modal.style.display='flex';return;}}});
+document.getElementById('mclose').onclick=()=>modal.style.display='none';
+modal.onclick=e=>{if(e.target===modal)modal.style.display='none'};
+</script>
+</body>
+</html>

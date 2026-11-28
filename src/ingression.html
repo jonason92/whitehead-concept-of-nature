@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingression — The Blue Coat — The Concept of Nature</title>
+<style>
+:root{--paper:#faf8f3;--ink:#1b2430;--accent:#6d4aff;--soft:#e8e3d8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;background:var(--paper);color:var(--ink);line-height:1.6}
+.wrap{max-width:920px;margin:0 auto;padding:2rem 1.5rem}
+a.back{font-family:sans-serif;font-size:.85rem;color:var(--accent);text-decoration:none}
+h1{font-weight:normal;margin:.5rem 0 .2rem}
+.claimbox{background:#fff;border-left:4px solid var(--accent);padding:1rem 1.2rem;margin:1.2rem 0;font-style:italic}
+.pid{font-family:sans-serif;font-size:.75rem;background:var(--soft);padding:.1rem .4rem;border-radius:3px;cursor:pointer}
+.pid:hover{background:var(--accent);color:#fff}
+.coatstage{background:#fff;border:1px solid var(--soft);height:300px;position:relative;overflow:hidden;margin:1rem 0}
+.coat{position:absolute;width:120px;height:170px;left:50%;top:50%;transform:translate(-50%,-50%);transition:all .6s}
+.coat .body{width:100%;height:100%;background:#23579c;border-radius:8px 8px 26px 26px;position:relative;transition:all .6s}
+.coat .lapel{position:absolute;top:0;left:50%;transform:translateX(-50%);width:44px;height:60px;background:#1a4271;border-radius:0 0 30px 30px}
+.huebar{height:16px;background:var(--soft);border-radius:8px;margin:1rem 0;position:relative}
+.huefill{height:100%;background:#23579c;width:0%;transition:width .6s}
+.venues{position:absolute;font-family:sans-serif;font-size:.72rem;color:#888}
+.v1{left:12px;top:12px}.v2{right:12px;top:12px}.v3{left:12px;bottom:12px}.v4{right:12px;bottom:12px}
+.venue-on{color:var(--accent);font-weight:bold}
+.controls{display:flex;flex-wrap:wrap;gap:1.5rem;margin:1rem 0;font-family:sans-serif;font-size:.85rem}
+.controls label{display:block;color:#777;margin-bottom:.2rem}
+input[type=range]{width:260px}
+.toggles{margin:1rem 0;font-family:sans-serif;font-size:.85rem}
+.tbtn{border:1px solid var(--ink);background:none;padding:.3rem .8rem;cursor:pointer;margin-right:.5rem}
+.tbtn.on{background:var(--ink);color:var(--paper)}
+.note{border:1px solid var(--soft);background:#fff;padding:1rem 1.2rem;margin:1rem 0;font-size:.95rem}
+.roles{display:flex;flex-wrap:wrap;gap:.8rem;margin:1rem 0}
+.rcard{border:1px solid var(--soft);background:#fff;padding:.8rem 1rem;font-family:sans-serif;font-size:.8rem;flex:1;min-width:180px}
+.rcard b{display:block;color:var(--accent);margin-bottom:.3rem}
+.modal{display:none;position:fixed;inset:0;background:rgba(27,36,48,.6);align-items:center;justify-content:center}
+.modal .box{background:var(--paper);max-width:640px;max-height:80vh;overflow:auto;padding:2rem;border-radius:6px}
+.modal .close{float:right;cursor:pointer;font-family:sans-serif}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--soft);font-size:.8rem;color:#777;font-family:sans-serif}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html">&larr; Home</a>
+<h1 data-i18n="title"></h1>
+<div class="claimbox"><span data-i18n="claim"></span>
+<br><small><span class="pid" data-pid="ch7-p018">ch7-p018</span></small></div>
+
+<div class="coatstage" id="stage">
+<div class="coat" id="coat"><div class="body"><div class="lapel"></div></div></div>
+<span class="venues v1" id="v1">sense-object: blue patch seen</span>
+<span class="venues v2" id="v2">perceptual object: this coat</span>
+<span class="venues v3" id="v3">physical object: cloth + dye + light</span>
+<span class="venues v4" id="v4">scientific object: molecular structure</span>
+</div>
+<div class="huebar"><div class="huefill" id="huefill"></div></div>
+
+<div class="controls">
+<div><label data-i18n="hl"></label><input type="range" id="hue" min="0" max="100" value="30"></div>
+</div>
+<div class="toggles">
+<button class="tbtn on" id="t-role" data-i18n="brole"></button>
+<button class="tbtn" id="t-mirror" data-i18n="bmir"></button>
+</div>
+
+<div class="roles" id="roles">
+<div class="rcard"><b data-i18n="r1t"></b><span data-i18n="r1x"></span><br><small><span class="pid" data-pid="ch7-p002">ch7-p002</span></small></div>
+<div class="rcard"><b data-i18n="r2t"></b><span data-i18n="r2x"></span><br><small><span class="pid" data-pid="ch7-p008">ch7-p008</span></small></div>
+<div class="rcard"><b data-i18n="r3t"></b><span data-i18n="r3x"></span><br><small><span class="pid" data-pid="ch7-p012">ch7-p012</span></small></div>
+</div>
+
+<div class="note" id="note-mirror" style="display:none">
+<b data-i18n="mnt"></b><p data-i18n="mnx"></p>
+<small><span class="pid" data-pid="ch7-p024">ch7-p024</span> · <span class="pid" data-pid="ch7-p030">ch7-p030</span></small>
+</div>
+
+<footer>The Concept of Nature · Module V · <a href="https://github.com/jonason92/whitehead-concept-of-nature">GitHub repo</a></footer>
+</div>
+<div class="modal" id="modal"><div class="box">
+<span class="close" id="mclose">&#10005;</span>
+<h3 id="modalpid" style="font-family:sans-serif"></h3>
+<div id="modaltext" style="margin-top:1rem"></div>
+</div></div>
+<script>
+const I18N={
+en:{title:"The Blue Coat — Ingression of Objects into Events",
+claim:"The blue coat is one nature approached under four descriptions. The object does not sit behind the events: it ingresses into them — one shade of blue active across many situations, the determinate amid the indeterminate.",
+hl:"shade of blue ingressing into the situation",
+brole:"roles of objects",bmir:"mirror test (bifurcation trap)",
+r1t:"Sense-objects",r1x:"The ingredient of experience: this shade of blue, here, now, amid other shades.",
+r2t:"Perceptual objects",r2x:"The coat: a bundle of sensa unified by the implicit tie of being one recognisable thing for a percipient.",
+r3t:"Physical objects",r3x:"Cloth, dye, light: the situational ingression that makes the blue show itself under these conditions of nature.",
+mnt:"Mirror test",
+mnx:"Move the coat into the mirror regime: bifurcation pulls the blue into a private mind versus a public molecule — the coat splits in two. Switch off the mirror: one nature, one blue, several modes of ingression."},
+de:{title:"Der blaue Mantel — Ingression der Objekte in Ereignisse",
+claim:"Der blaue Mantel ist eine Natur unter vier Beschreibungen. Das Objekt steht nicht hinter den Ereignissen: es ingrediert in sie — ein Blauton aktiv in vielen Situationen, das Bestimmte inmitten des Unbestimmten.",
+hl:"Blauton, der in die Situation ingrediert",
+brole:"Rollen der Objekte",bmir:"Spiegeltest (Bifurkationsfalle)",
+r1t:"Sinnesobjekte",r1x:"Die Ingredienz des Erlebens: dieser Blauton, hier, jetzt, inmitten anderer Töne.",
+r2t:"Wahrnehmungsobjekte",r2x:"Der Mantel: ein Buendel von Sensa, geeint durch den impliziten Zusammenhang, fuer ein Wahrnehmendes ein erkennbares Ding zu sein.",
+r3t:"Physikalische Objekte",r3x:"Stoff, Faerbung, Licht: die situative Ingression, die das Blau unter diesen Naturbedingungen zeigt.",
+mnt:"Spiegeltest",
+mnx:"Stelle den Mantel ins Spiegelregime: Die Bifurkation zieht das Blau in einen privaten Geist versus ein oeffentliches Molekül — der Mantel zerfaellt in zwei. Schalte den Spiegel aus: eine Natur, ein Blau, mehrere Ingressionsweisen."}};
+function setLang(l){document.documentElement.lang=l;
+document.querySelectorAll('[data-i18n]').forEach(el=>{if(I18N[l][el.dataset.i18n])el.textContent=I18N[l][el.dataset.i18n]});
+localStorage.setItem('wcn-lang',l);}
+setLang(localStorage.getItem('wcn-lang')||'en');
+const coat=document.getElementById('coat'),hue=document.getElementById('hue'),huefill=document.getElementById('huefill');
+let mirror=false;
+function hsl(t){const h=210+t*0.9;return 'hsl('+h+',55%,'+(42+t*0.15)+'%)';}
+function render(){
+const t=hue.value/100;
+coat.querySelector('.body').style.background=hsl(t);
+coat.querySelector('.lapel').style.background=hsl(t+0.05);
+huefill.style.width=t*100+'%';huefill.style.background=hsl(t);
+document.querySelectorAll('.venues').forEach(v=>v.classList.toggle('venue-on',mirror?false:Math.random()>0.5));
+if(mirror){coat.style.transform='translate(-50%,-50%) scaleX(-1) skewX(8deg)';coat.style.opacity='.6';}
+else{coat.style.transform='translate(-50%,-50%)';coat.style.opacity='1';}
+}
+hue.oninput=render;
+document.getElementById('t-mirror').onclick=()=>{mirror=!mirror;document.getElementById('t-mirror').classList.toggle('on',mirror);document.getElementById('note-mirror').style.display=mirror?'block':'none';render();};
+render();
+const modal=document.getElementById('modal');let CORPUS=null;
+fetch('../data/corpus.json').then(r=>r.json()).then(d=>CORPUS=d);
+document.addEventListener('click',e=>{
+if(!e.target.classList.contains('pid'))return;
+const pid=e.target.dataset.pid;if(!CORPUS)return;
+for(const ch of CORPUS.chapters){const p=ch.paragraphs.find(x=>x.pid===pid);
+if(p){document.getElementById('modalpid').textContent=pid+' — '+ch.title;
+document.getElementById('modaltext').textContent=p.text;modal.style.display='flex';return;}}});
+document.getElementById('mclose').onclick=()=>modal.style.display='none';
+modal.onclick=e=>{if(e.target===modal)modal.style.display='none'};
+</script>
+</body>
+</html>
