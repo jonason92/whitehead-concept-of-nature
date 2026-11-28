@@ -90,7 +90,7 @@ const sim=d3.forceSimulation(G.nodes)
  .force('y',d3.forceY(n=>bandY0+(n.chapter-1)*bandH+bandH/2).strength(.85))
  .force('x',d3.forceX(W/2).strength(.045))
  .on('tick',ticked);
-sim.alphaTarget=0; sim.alphaDecay=0.0228;
+sim.alphaTarget(0);
 
 const link=svg.append('g').selectAll('line').data(G.edges).join('line')
  .attr('stroke',l=>l.kind==='contrasts_with'?'#c0392b':'#c2bcae')
