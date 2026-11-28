@@ -12,7 +12,16 @@ body{font-family:Georgia,serif;background:var(--paper);color:var(--ink);line-hei
 a.back{font-family:sans-serif;font-size:.85rem;color:var(--accent);text-decoration:none}
 h1{font-weight:normal;margin:.5rem 0 .2rem}
 .sub{font-style:italic;color:#666;margin-bottom:1.5rem}
-.toc{display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0 2rem}
+.tools{margin:1rem 0;font-family:sans-serif;font-size:.85rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.tools button{border:1px solid var(--ink);background:#fff;padding:.3rem .8rem;cursor:pointer}
+.tools button:hover{background:var(--ink);color:var(--paper)}
+mark.ann{background:#ffe9a8;border-bottom:2px solid var(--accent);cursor:help}
+.annpop{position:fixed;background:#fff;border:1px solid var(--accent);border-radius:6px;padding:.8rem 1rem;max-width:320px;box-shadow:0 4px 14px rgba(27,36,48,.25);font-size:.9rem;z-index:60}
+.annpop textarea{width:100%;min-height:60px;font:inherit;margin:.4rem 0}
+.annpop input{width:100%;font:inherit;margin-bottom:.4rem}
+.annpop .row{display:flex;gap:.4rem;justify-content:flex-end;font-family:sans-serif}
+.annpop button{cursor:pointer}
+.toggles{margin:1rem 0;font-family:sans-serif;font-size:.85rem}
 .tbtn{border:1px solid var(--soft);background:#fff;padding:.35rem .8rem;font-family:sans-serif;font-size:.78rem;cursor:pointer;border-radius:3px}
 .tbtn:hover,.tbtn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 .chaptitle{font-size:1.4rem;margin:1.5rem 0 1rem;border-bottom:1px solid var(--soft);padding-bottom:.5rem}
@@ -30,6 +39,7 @@ footer a{color:var(--accent)}
 <a class="back" href="index.html">&larr; Home</a>
 <h1>Corpus Reader</h1>
 <div class="sub">Alfred North Whitehead, The Concept of Nature (Cambridge 1920) · Project Gutenberg #18835 · every paragraph addressed by pid</div>
+<div class="tools"><button id="exportann">Export annotations</button><button id="importann">Import annotations</button></div>
 <nav class="toc" id="toc"></nav>
 <div id="content"><div class="loading">Loading corpus …</div></div>
 <footer>Open science edition · <a href="https://github.com/jonason92/whitehead-concept-of-nature">GitHub repo</a> · CC BY 4.0 (data) · text Public Domain</footer>
@@ -49,7 +59,9 @@ b.id='tocbtn'+i;toc.appendChild(b);});
 const want=location.hash.match(/^(ch\d+-p\d+)$/);
 showChapter(want?(CORPUS.chapters||[]).concat(CORPUS.notes||[]).findIndex(c=>c.paragraphs.some(p=>p.pid===want[1])):0,true);
 }
+let curIdx=0;
 function showChapter(i,followHash){
+curIdx=i;
 document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));
 const btn=document.getElementById('tocbtn'+i);if(btn)btn.classList.add('on');
 const ch=(CORPUS.chapters||[]).concat(CORPUS.notes||[])[i];
@@ -58,7 +70,106 @@ el.innerHTML='<div class="chaptitle">'+ch.title+'</div>'+
 ch.paragraphs.map(p=>'<p class="para" id="'+p.pid+'"><span class="pidchip">'+p.pid+'</span>'+(p.orig_pages&&p.orig_pages.length?'<span class="pidchip">p. '+p.orig_pages.join(', ')+'</span>':'')+p.text.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</p>').join('\n');
 if(followHash&&location.hash){const t=document.querySelector(location.hash);if(t)setTimeout(()=>t.scrollIntoView({block:'center'}),60);}
 else window.scrollTo(0,0);
+renderAnn();
 }
+// ---- annotation MVP (native, localStorage, export/import) ----
+const ANN_KEY='wcn-annotations';
+function loadAnn(){try{return JSON.parse(localStorage.getItem(ANN_KEY))||{}}catch(e){return{}}}
+function saveAnn(a){localStorage.setItem(ANN_KEY,JSON.stringify(a))}
+function annFor(){return (loadAnn()['ch'+curIdx]||[])}
+function renderAnn(){
+  const list=annFor(), walker=document.createTreeWalker(document.getElementById('content'),NodeFilter.SHOW_TEXT);
+  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  const map={};list.forEach((a,i)=>{(a.sel||'').trim()&&(map[a.sel.trim()]=map[a.sel.trim()]||[]).push(i)});
+  if(!Object.keys(map).length)return;
+  nodes.forEach(t=>{
+    const hit=Object.keys(map).filter(s=>t.textContent.includes(s));
+    if(!hit.length)return;
+    let html=t.textContent;
+    hit.forEach(sel=>{
+      html=html.split(sel).join('<mark class="ann" data-ann="'+map[sel].join(',')+'">'+sel+'</mark>');
+    });
+    const span=document.createElement('span');span.innerHTML=html;
+    t.parentNode.replaceChild(span,t);
+  });
+}
+function annPopup(marks){
+  closeAnnPop();
+  const pop=document.createElement('div');pop.className='annpop';
+  const list=annFor();
+  const items=marks.flatMap(idx=>list[idx]?[{idx,a:list[idx]}]:[]);
+  pop.innerHTML='<b>Annotation</b><div id="annlist"></div>'+
+    '<textarea id="anntxt" placeholder="Notiz..."></textarea>'+
+    '<input id="anntag" placeholder="Tag (optional)">'+
+    '<div class="row"><button id="anndel">delete</button><button id="annclose">close</button><button id="anncancel" style="display:none">cancel</button><button id="annsave" style="display:none">save</button></div>';
+  document.body.appendChild(pop);
+  const rl=document.getElementById('annlist');
+  if(items.length)rl.innerHTML=items.map(it=>'<div>'+(it.a.tag?'['+it.a.tag+'] ':'')+it.a.note+'</div>').join('');
+  const r=marks[0].getBoundingClientRect();
+  pop.style.left=Math.min(innerWidth-340,Math.max(8,r.left))+'px';
+  pop.style.top=Math.min(innerHeight-200,r.bottom+6)+'px';
+  document.getElementById('annclose').onclick=closeAnnPop;
+  document.getElementById('anndel').onclick=()=>{
+    const a=loadAnn();a['ch'+curIdx]=annFor().filter((_,i)=>!items.some(it=>it.idx===i));saveAnn(a);
+    closeAnnPop();showChapter(curIdx);
+  };
+  document.getElementById('anncancel').onclick=()=>{document.getElementById('anntxt').style.display='block';document.getElementById('anntag').style.display='block';document.getElementById('annsave').style.display='inline';document.getElementById('anncancel').style.display='none';};
+  document.getElementById('annsave').onclick=()=>{
+    const note=document.getElementById('anntxt').value.trim();
+    if(!note)return;
+    const a=loadAnn();const arr=a['ch'+curIdx]||[];
+    arr.push({sel:window.__annSel||'',note:note,tag:document.getElementById('anntag').value.trim()});
+    a['ch'+curIdx]=arr;saveAnn(a);closeAnnPop();showChapter(curIdx);
+  };
+  document.getElementById('anntxt').style.display=items.length?'none':'block';
+  document.getElementById('anntag').style.display=items.length?'none':'block';
+  document.getElementById('annsave').style.display=items.length?'none':'inline';
+  document.getElementById('anncancel').style.display=items.length?'inline':'none';
+}
+function closeAnnPop(){document.querySelectorAll('.annpop').forEach(p=>p.remove())}
+document.addEventListener('selectionchange',()=>{
+  closeAnnPop();
+  const sel=window.getSelection&&window.getSelection();
+  if(!sel||sel.isCollapsed||!curIdx)return;
+  const txt=sel.toString().trim();
+  if(txt.length<3)return;
+  window.__annSel=txt;
+  clearTimeout(window.__annT);
+  window.__annT=setTimeout(()=>{
+    const r=sel.getRangeAt(0).getBoundingClientRect();
+    if(!r.width&&!r.height)return;
+    window.__annBtn={sel:txt,x:r.left,y:r.bottom};
+  },400);
+});
+document.addEventListener('mouseup',()=>{
+  setTimeout(()=>{
+    if(window.__annBtn){const b=window.__annBtn;window.__annBtn=null;
+      const pop=document.createElement('div');pop.className='annpop';
+      pop.innerHTML='<b>Annotate selection?</b><div class="row"><button id="anny">yes</button><button id="annn">no</button></div>';
+      document.body.appendChild(pop);
+      pop.style.left=Math.min(innerWidth-200,b.x)+'px';pop.style.top=(b.y+6)+'px';
+      document.getElementById('anny').onclick=()=>{closeAnnPop();window.__annSel=b.sel;annPopup([]);document.getElementById('anntxt').focus();};
+      document.getElementById('annn').onclick=closeAnnPop;
+    }
+  },50);
+});
+document.addEventListener('click',e=>{
+  const m=e.target.closest&&e.target.closest('mark.ann');
+  if(m)annPopup([...m.parentElement.querySelectorAll('mark.ann[data-ann="'+m.dataset.ann+'"]')]);
+});
+document.getElementById('exportann').onclick=()=>{
+  const blob=new Blob([localStorage.getItem(ANN_KEY)||'{}'],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='wcn_annotations_'+new Date().toISOString().slice(0,10)+'.json';a.click();
+};
+document.getElementById('importann').onclick=()=>{
+  const inp=document.createElement('input');inp.type='file';inp.accept='application/json';
+  inp.onchange=()=>{const f=inp.files[0];if(!f)return;
+    const rd=new FileReader();
+    rd.onload=()=>{try{saveAnn(JSON.parse(rd.result));alert('Annotations imported.');showChapter(curIdx);}catch(e){alert('Invalid JSON: '+e.message)}};
+    rd.readAsText(f);};
+  inp.click();
+};
 init();
 </script>
 </body>
