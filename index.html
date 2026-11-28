@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whitehead: The Concept of Nature — Interactive Edition</title>
+<style>
+:root{--paper:#faf8f3;--ink:#1b2430;--accent:#6d4aff;--soft:#e8e3d8;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding:3rem 1.5rem}
+header{border-bottom:3px double var(--ink);padding-bottom:1.5rem;margin-bottom:2rem}
+h1{font-size:2rem;font-weight:normal;letter-spacing:.02em}
+h1 em{color:var(--accent);font-style:italic}
+.sub{font-style:italic;color:#555;margin-top:.4rem}
+.langtoggle{float:right;font-family:sans-serif;font-size:.85rem}
+.langtoggle button{background:none;border:1px solid var(--ink);padding:.2rem .6rem;cursor:pointer;font:inherit}
+.langtoggle button.active{background:var(--ink);color:var(--paper)}
+.lede{font-size:1.1rem;margin-bottom:2rem}
+ul.modules{list-style:none}
+ul.modules li{border:1px solid var(--soft);background:#fff;margin-bottom:1rem;padding:1.2rem 1.5rem}
+ul.modules li a{color:var(--ink);text-decoration:none;display:block}
+ul.modules li a:hover h2{color:var(--accent)}
+ul.modules h2{font-size:1.25rem;font-weight:normal;margin-bottom:.3rem}
+ul.modules .meta{font-size:.85rem;color:#777;font-family:sans-serif}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--soft);font-size:.8rem;color:#777;font-family:sans-serif}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<span class="langtoggle"><button id="btn-en" class="active">EN</button> <button id="btn-de">DE</button></span>
+<h1>The Concept of <em>Nature</em></h1>
+<div class="sub" data-i18n="subtitle"></div>
+</header>
+<p class="lede" data-i18n="lede"></p>
+<ul class="modules">
+<li><a href="bifurcation.html">
+<h2 data-i18n="m1t"></h2>
+<span class="meta" data-i18n="m1m"></span>
+</a></li>
+<li><a href="passage.html">
+<h2 data-i18n="m2t"></h2>
+<span class="meta" data-i18n="m2m"></span>
+</a></li>
+<li><a href="abstraction.html">
+<h2 data-i18n="m3t"></h2>
+<span class="meta" data-i18n="m3m"></span>
+</a></li>
+<li><a href="congruence.html">
+<h2 data-i18n="m4t"></h2>
+<span class="meta" data-i18n="m4m"></span>
+</a></li>
+<li><a href="ingression.html">
+<h2 data-i18n="m5t"></h2>
+<span class="meta" data-i18n="m5m"></span>
+</a></li>
+<li><a href="reader.html">
+<h2 data-i18n="rt"></h2>
+<span class="meta" data-i18n="rm"></span>
+</a></li>
+</ul>
+<footer><span data-i18n="foot"></span>
+<a href="https://github.com/jonason92/whitehead-concept-of-nature">GitHub</a> ·
+<span style="font-size:.75rem">MIT + CC BY 4.0 · Text: Public Domain (PG #18835)</span></footer>
+</div>
+<script>
+const I18N={
+en:{subtitle:"Alfred North Whitehead · Tarner Lectures 1919 · An interactive, source-reproducible edition",
+lede:"Each interactive module is built on a three-layer data model: every claim traces back to a concept record, and every record traces back to a numbered paragraph of the original 1920 text. Click any quotation mark to verify.",
+m1t:"I · The Bifurcation Explorer",m1m:"apparent vs. causal nature · the fire problem as pivot — READY",
+m2t:"II · Passage of Nature",m2m:"durations, moments, time-systems, Scholem marginalia — READY",
+m3t:"III · Extensive Abstraction",m3m:"the zoom from events to points, Greek point note — READY",
+m4t:"IV · Congruence",m4m:"Poincaré vs. Russell, axioms — READY",
+m5t:"V · Object Ingression",m5m:"the blue coat: roles, ingression, mirror test — READY",
+foot:"Open science edition · ",rt:"VI \u00b7 Corpus Reader",rm:"all nine chapters, 464 paragraphs, pid-addressable \u2014 READY"},
+de:{subtitle:"Alfred North Whitehead · Tarner-Vorlesungen 1919 · Eine interaktive, quellenreproduzierbare Edition",
+lede:"Jedes interaktive Modul baut auf einem dreischichtigen Datenmodell auf: Jeder Claim verweist auf einen Konzept-Record, jeder Record auf einen nummerierten Absatz des Originaltexts von 1920. Klicke auf ein Anführungszeichen, um es zu prüfen.",
+m1t:"I · Der Bifurkations-Explorer",m1m:"apparent vs. causal nature · das Feuer-Problem als Kippstelle — BEREIT",
+m2t:"II · Passage of Nature",m2m:"Dauern, Momente, Zeitsysteme, Scholem-Randnotiz — BEREIT",
+m3t:"III · Extensive Abstraction",m3m:"der Zoom vom Ereignis zum Punkt, Greek-Point-Notiz — BEREIT",
+m4t:"IV · Kongruenz",m4m:"Poincaré vs. Russell, Axiome — BEREIT",
+m5t:"V · Objekt-Ingression",m5m:"der blaue Mantel: Rollen, Ingression, Spiegeltest — BEREIT",
+foot:"Open-Science-Edition · ",rt:"VI · Korpus-Lesemodus",rm:"alle neun Kapitel, 464 Absätze, pid-adressierbar — BEREIT"}};
+function setLang(l){document.documentElement.lang=l;
+document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=I18N[l][el.dataset.i18n]});
+document.querySelectorAll('.langtoggle button').forEach(b=>b.classList.toggle('active',b.id==='btn-'+l));
+localStorage.setItem('wcn-lang',l);}
+document.getElementById('btn-en').onclick=()=>setLang('en');
+document.getElementById('btn-de').onclick=()=>setLang('de');
+setLang(localStorage.getItem('wcn-lang')||'en');
+</script>
+</body>
+</html>

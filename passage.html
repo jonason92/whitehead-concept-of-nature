@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passage of Nature — The Concept of Nature</title>
+<style>
+:root{--paper:#faf8f3;--ink:#1b2430;--accent:#6d4aff;--soft:#e8e3d8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;background:var(--paper);color:var(--ink);line-height:1.6}
+.wrap{max-width:920px;margin:0 auto;padding:2rem 1.5rem}
+a.back{font-family:sans-serif;font-size:.85rem;color:var(--accent);text-decoration:none}
+h1{font-weight:normal;margin:.5rem 0 .2rem}
+.claimbox{background:#fff;border-left:4px solid var(--accent);padding:1rem 1.2rem;margin:1.2rem 0;font-style:italic}
+.pid{font-family:sans-serif;font-size:.75rem;background:var(--soft);padding:.1rem .4rem;border-radius:3px;cursor:pointer}
+.pid:hover{background:var(--accent);color:#fff}
+.stage{background:#fff;border:1px solid var(--soft);height:260px;position:relative;overflow:hidden;margin:1rem 0}
+.dur{position:absolute;height:60px;border:2px solid var(--accent);background:rgba(109,74,255,.08);transition:all .4s}
+.event{position:absolute;width:34px;height:34px;background:var(--ink);border-radius:3px;opacity:.25;transition:opacity .4s}
+.event.inside{opacity:.9}
+.controls{display:flex;flex-wrap:wrap;gap:1.5rem;margin:1rem 0;font-family:sans-serif;font-size:.85rem}
+.controls label{display:block;color:#777;margin-bottom:.2rem}
+input[type=range]{width:220px}
+.toggles{margin:1rem 0;font-family:sans-serif;font-size:.85rem}
+.tbtn{border:1px solid var(--ink);background:none;padding:.3rem .8rem;cursor:pointer;margin-right:.5rem}
+.tbtn.on{background:var(--ink);color:var(--paper)}
+.note{border:1px solid var(--soft);background:#fff;padding:1rem 1.2rem;margin:1rem 0;font-size:.95rem}
+.marginalia{display:none;border-left:4px double var(--accent);background:#f4f0ff;padding:1rem 1.2rem;margin:1rem 0;font-size:.95rem}
+.modal{display:none;position:fixed;inset:0;background:rgba(27,36,48,.6);align-items:center;justify-content:center}
+.modal .box{background:var(--paper);max-width:640px;max-height:80vh;overflow:auto;padding:2rem;border-radius:6px}
+.modal .close{float:right;cursor:pointer;font-family:sans-serif}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--soft);font-size:.8rem;color:#777;font-family:sans-serif}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html">&larr; Home</a>
+<h1 data-i18n="title"></h1>
+<div class="claimbox"><span data-i18n="claim"></span>
+<br><small><span class="pid" data-pid="ch3-p018">ch3-p018</span></small></div>
+<div class="stage" id="stage"></div>
+<div class="controls">
+<div><label data-i18n="s1l"></label><input type="range" id="s1" min="0" max="100" value="30"></div>
+<div><label data-i18n="s2l"></label><input type="range" id="s2" min="0" max="100" value="0"></div>
+</div>
+<div class="toggles">
+<button class="tbtn on" id="t-dur" data-i18n="bdur"></button>
+<button class="tbtn" id="t-mom" data-i18n="bmom"></button>
+<button class="tbtn" id="t-sch" data-i18n="bsch"></button>
+</div>
+<div class="note" id="note-dur">
+<b data-i18n="ndt"></b><p data-i18n="ndx"></p>
+<small><span class="pid" data-pid="ch3-p008">ch3-p008</span> · <span class="pid" data-pid="ch3-p012">ch3-p012</span></small>
+</div>
+<div class="note" id="note-mom" style="display:none">
+<b data-i18n="nmt"></b><p data-i18n="nmx"></p>
+<small><span class="pid" data-pid="ch3-p026">ch3-p026</span> · <span class="pid" data-pid="ch3-p030">ch3-p030</span></small>
+</div>
+<div class="marginalia" id="marg">
+<b data-i18n="mgt"></b><p data-i18n="mgx"></p><small data-i18n="mgs"></small>
+</div>
+<footer>The Concept of Nature · Module II · <a href="https://github.com/jonason92/whitehead-concept-of-nature">GitHub repo</a></footer>
+</div>
+<div class="modal" id="modal"><div class="box">
+<span class="close" id="mclose">&#10005;</span>
+<h3 id="modalpid" style="font-family:sans-serif"></h3>
+<div id="modaltext" style="margin-top:1rem"></div>
+</div></div>
+<script>
+const I18N={
+en:{title:"Passage of Nature — Time-Systems in Transition",
+claim:"Time is not a series of instants but the passage itself: durations are the complete events; moments are ideal limit-products, not realities. Simultaneity is system-relative.",
+s1l:"present duration (moves through nature)",s2l:"time-system (alpha · beta · gamma)",
+bdur:"duration view",bmom:"moment view",bsch:"Scholem marginalia",
+ndt:"Durations: the whole simultaneous occurrence",
+ndx:"The duration is the complete slab of nature that is NOW for sense-awareness. Shift the first slider and the highlighted slab moves through the event-landscape. No instant is ever reached — the present is always extended.",
+nmt:"Moments: ideal limits, never reached",
+nmx:"Switch to the moment view: the slab thins towards an ideal limit without temporal extension. The moment is an abstractive product of converging durations — it never occurs.",
+mgt:"Marginal note: the eternal present (G. Scholem)",
+mgx:"Against the passage of nature, one may set another tempo of becoming: the eternal present, in which nothing passes because everything is already there. Scholem and Whitehead mark two tempos of time — held side by side, not resolved.",
+mgs:"Counterpoint, not part of the concept graph — toggle it off and it disappears."},
+de:{title:"Passage of Nature — Zeitsysteme im Durchgang",
+claim:"Zeit ist keine Punktreihe, sondern der Durchgang selbst: Dauern sind die vollständigen Ereignisse; Momente sind ideale Grenzprodukte, keine Realitäten. Gleichzeitigkeit ist systemrelativ.",
+s1l:"Gegenwartsdauer (wandert durch die Natur)",s2l:"Zeitsystem (alpha · beta · gamma)",
+bdur:"Dauer-Ansicht",bmom:"Moment-Ansicht",bsch:"Scholem-Randnotiz",
+ndt:"Dauern: die ganze gleichzeitige Okkurrenz",
+ndx:"Die Dauer ist die vollständige Scheibe Natur, die JETZT für die Sinneswahrnehmung da ist. Mit dem ersten Regler wanderst du mit der Gegenwartsdauer durch die Ereignislandschaft. Kein Zeitpunkt wird je erreicht — die Gegenwart ist immer ausgedehnt.",
+nmt:"Momente: ideale Grenzen, nie erreicht",
+nmx:"Schalte in die Moment-Ansicht: Die Scheibe verdünnt gegen ein ideales Grenzgebilde ohne zeitliche Ausdehnung. Der Moment ist Abstraktionsprodukt konvergierender Dauern — er kommt nie vor.",
+mgt:"Randnotiz: die ewige Gegenwart (G. Scholem)",
+mgx:"Gegen die passage of nature lässt sich ein anderes Tempo des Werdens setzen: die ewige Gegenwart, in der nichts vergeht, weil alles schon da ist. Scholem und Whitehead bezeichnen zwei Tempi der Zeit — nebeneinander gehalten, nicht aufgelöst.",
+mgs:"Kontrapunkt, kein Teil des Konzeptgraphen — ausschalten, und er verschwindet."}};
+
+function setLang(l){document.documentElement.lang=l;
+document.querySelectorAll('[data-i18n]').forEach(el=>{if(I18N[l][el.dataset.i18n])el.textContent=I18N[l][el.dataset.i18n]});
+localStorage.setItem('wcn-lang',l);}
+setLang(localStorage.getItem('wcn-lang')||'en');
+
+const stage=document.getElementById('stage');
+const EV=[{x:3,y:20},{x:14,y:120},{x:26,y:60},{x:38,y:150},{x:52,y:30},{x:64,y:110},{x:78,y:70},{x:90,y:130}];
+EV.forEach(e=>{const d=document.createElement('div');d.className='event';d.style.left=e.x+'%';d.style.top=e.y+'px';stage.appendChild(d);});
+const slab=document.createElement('div');slab.className='dur';stage.appendChild(slab);
+
+const s1=document.getElementById('s1'),s2=document.getElementById('s2');
+let view='dur';
+function render(){
+const w=view==='dur'?34:Math.max(1.2,34*Math.pow(0.35,(s2.value/100)*3));
+const x=s1.value/100*(100-w);
+slab.style.left=x+'%';slab.style.width=w+'%';
+slab.style.top=(40+s2.value*0.6)+'px';
+document.querySelectorAll('.event').forEach(e=>{
+const px=parseFloat(e.style.left);e.classList.toggle('inside',px>=x&&px<=x+w);});
+}
+s1.oninput=s2.oninput=render;
+
+document.getElementById('t-dur').onclick=()=>{view='dur';tog('t-dur');document.getElementById('note-dur').style.display='block';document.getElementById('note-mom').style.display='none';render();};
+document.getElementById('t-mom').onclick=()=>{view='mom';tog('t-mom');document.getElementById('note-dur').style.display='none';document.getElementById('note-mom').style.display='block';render();};
+function tog(id){['t-dur','t-mom'].forEach(i=>document.getElementById(i).classList.toggle('on',i===id));}
+document.getElementById('t-sch').onclick=()=>{const m=document.getElementById('marg');const b=document.getElementById('t-sch');const on=m.style.display!=='block';m.style.display=on?'block':'none';b.classList.toggle('on',on);};
+render();
+
+const modal=document.getElementById('modal');let CORPUS=null;
+fetch('data/corpus.json').then(r=>r.json()).then(d=>CORPUS=d);
+document.addEventListener('click',e=>{
+if(!e.target.classList.contains('pid'))return;
+const pid=e.target.dataset.pid;if(!CORPUS)return;
+for(const ch of CORPUS.chapters){const p=ch.paragraphs.find(x=>x.pid===pid);
+if(p){document.getElementById('modalpid').textContent=pid+' — '+ch.title;
+document.getElementById('modaltext').textContent=p.text;modal.style.display='flex';return;}}});
+document.getElementById('mclose').onclick=()=>modal.style.display='none';
+modal.onclick=e=>{if(e.target===modal)modal.style.display='none'};
+</script>
+</body>
+</html>
